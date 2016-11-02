@@ -1,10 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/Users/Stevie/code/kevy/config'
-let g:netrw_dirhist_2='/Users/Stevie/code/kevy/lib/apis/sugar7_api'
-let g:netrw_dirhist_3='/Users/Stevie/code/kevy/db/migrate'
-let g:netrw_dirhist_4='/Users/Stevie/code/kevy/app/workers'
-let g:netrw_dirhist_5='/Users/Stevie/code/kevy/config'
-let g:netrw_dirhist_6='/Users/Stevie/code/kevy/app/workers'
-let g:netrw_dirhist_7='/Users/Stevie/code/kemp/kemp-app'
-let g:netrw_dirhist_8='/Users/stevievines/.vim'
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/Users/brianmalinconico/.rbenv/versions/2.1.7/lib/ruby/gems/2.1.0/gems/elasticsearch-persistence-0.1.9/lib/elasticsearch/persistence/model'
+let g:netrw_dirhist_2='/Users/brianmalinconico/workspace/terminus/app/models/strategy_campaign_management'
+let g:netrw_dirhist_3='/Users/brianmalinconico/workspace/terminus/spec/javascripts'
+let g:netrw_dirhist_4='/Users/brianmalinconico/workspace/terminus/spec'
+let g:netrw_dirhist_5='/Users/brianmalinconico/.rbenv/versions/2.1.7/lib/ruby/gems/2.1.0/gems/sprockets-es6-0.9.1/lib/sprockets/es6'

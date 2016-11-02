@@ -3,8 +3,7 @@ ZSH=$HOME/.oh-my-zsh
 export AWS_ID=kevy
 export AWS_SECRET=kevy
 DEFAULT_USER=$USER
-# cert.pem file for openssl
-#export SSL_CERT_FILE=/usr/local/etc/openssl/certs/cert.pem
+#Karma App Environment Variables
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -19,8 +18,6 @@ alias don='pair up strukturedkaos'
 alias tmux-start='sh /usr/share/tmux-start.sh'
 
 alias clean-branches="git checkout master; git fetch; git rebase; git branch --merged | grep -v '\*' | xargs -n 1 git branch -D"
-
-alias mm="middleman"
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -54,10 +51,11 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-# rbenv install
+## Rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
-# Customize to your needs...
+## Local bin files first!
+#
 export PATH="./bin:$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
-
+alias sforeman="foreman start | tee -a log/foreman.log"

@@ -5,6 +5,10 @@ set nocompatible               " be iMproved
  filetype off                   " required!
 
 set relativenumber "display line numbers"
+" set number "display line numbers"
+set incsearch
+set relativenumber
+set colorcolumn=80
 set ruler
 set nowrap
 "set cursorline
@@ -38,10 +42,10 @@ inoremap <Tab> <C-R>=CleverTab()<CR>
 let g:mustache_abbreviations = 1
 
 " Force Syntastic to Use RVM Managed Ruby Executable
-let g:syntastic_ruby_mri_exec = '~/.rvm/rubies/ruby-2.1.6/bin/ruby'
+"let g:syntastic_ruby_mri_exec = '~/.rvm/rubies/ruby-2.1.6/bin/ruby'
 
 " Ctrl P ignore
-set wildignore+=*/tmp/*,*/dist/*,*/node_modules/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*/vendor/*,*/tmp/*,*/dist/*,*/node_modules/*,*.so,*.swp,*.zip     " MacOSX/Linux
 
 "disable arrow keys in insert mode
 imap <up> <nop>
@@ -87,4 +91,20 @@ nmap <leader>nt :NERDTreeToggle<cr>
 
 let &winwidth = &columns * 6 / 10
 let &winheight = &lines * 6 / 10
+
+
+" Alignment stuffs
+
+autocmd! VimEnter * AlignCtrl p0
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+inoremap  <Up>     <NOP>
+inoremap  <Down>   <NOP>
+inoremap  <Left>   <NOP>
+inoremap  <Right>  <NOP>
+noremap   <Up>     <NOP>
+noremap   <Down>   <NOP>
+noremap   <Left>   <NOP>
+noremap   <Right>  <NOP>
 

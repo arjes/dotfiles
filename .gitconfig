@@ -7,8 +7,8 @@
   interactive = auto
   status = auto
 [user]
-	name = stevievines
-	email = stevievines@gmail.com
+	name = Brian Malinconico
+	email = bmalinconico@terminus.com
 [push]
   default = current
 [core]
