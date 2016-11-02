@@ -2,3 +2,4 @@
 .vim/_backup
 .vim/_temp
 .chef
+.vim/.netrwhist

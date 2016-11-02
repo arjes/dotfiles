@@ -2,9 +2,9 @@
 ZSH=$HOME/.oh-my-zsh
 export AWS_ID=kevy
 export AWS_SECRET=kevy
-
+DEFAULT_USER=$USER
 # cert.pem file for openssl
-export SSL_CERT_FILE=/usr/local/etc/openssl/certs/cert.pem
+#export SSL_CERT_FILE=/usr/local/etc/openssl/certs/cert.pem
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
