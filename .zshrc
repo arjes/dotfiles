@@ -54,18 +54,10 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+# rbenv install
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
 # Customize to your needs...
-export PATH=$PATH:/Users/Stevie/.rvm/gems/ruby-1.9.3-p429/bin:/Users/Stevie/.rvm/gems/ruby-1.9.3-p429@global/bin:/Users/Stevie/.rvm/rubies/ruby-1.9.3-p429/bin:/Users/Stevie/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/git/bin:/Users/Stevie/bin
-path+=('/home/Stevie/npm/bin')
+export PATH="./bin:$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
 
-# Postgres
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
-
-# Kevy Redis for prod stuff locally
-export REDIS=redis://127.0.0.1:6379/0
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-export PATH="/Users/Stevie/.rvm/gems/ruby-1.9.3-p448/bin":$PATH
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

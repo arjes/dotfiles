@@ -4,7 +4,7 @@ call pathogen#helptags()
 set nocompatible               " be iMproved
  filetype off                   " required!
 
-set number "display line numbers"
+set relativenumber "display line numbers"
 set ruler
 set nowrap
 "set cursorline
@@ -44,15 +44,15 @@ let g:syntastic_ruby_mri_exec = '~/.rvm/rubies/ruby-2.1.6/bin/ruby'
 set wildignore+=*/tmp/*,*/dist/*,*/node_modules/*,*.so,*.swp,*.zip     " MacOSX/Linux
 
 "disable arrow keys in insert mode
-"imap <up> <nop>
-"imap <down> <nop>
-"imap <left> <nop>
-"imap <right> <nop>
+imap <up> <nop>
+imap <down> <nop>
+imap <left> <nop>
+imap <right> <nop>
 "disable arrow keys in normal mode
-"map <up> <nop>
-"map <down> <nop>
-"map <left> <nop>
-"map <right> <nop>
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
 
 " Ctrl-j/k deletes line below/above, and Alt-j/k inserts.
 nnoremap <silent><C-j> m`:silent +g/.*/d<CR>``:noh<CR>
@@ -83,3 +83,8 @@ function! s:RubyHashSyntaxToggle() range
 endfunction
 command! -bar -range RubyHashSyntaxToggle <line1>,<line2>call s:RubyHashSyntaxToggle()
 noremap <Leader>rh :RubyHashSyntaxToggle<CR>
+nmap <leader>nt :NERDTreeToggle<cr>
+
+let &winwidth = &columns * 6 / 10
+let &winheight = &lines * 6 / 10
+
