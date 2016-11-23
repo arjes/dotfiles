@@ -1,21 +1,40 @@
-call pathogen#infect()
-call pathogen#helptags()
+let g:python_host_prog='/usr/local/bin/python'
+call plug#begin('~/.vim/plugged')
 
-set nocompatible               " be iMproved
- filetype off                   " required!
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'junegunn/vim-easy-align'
+Plug 'kien/ctrlp.vim'
+Plug 'scrooloose/nerdcommenter'
+"Plug 'vim-syntastic/syntastic'
+Plug 'neomake/neomake'
+Plug 'kchmck/vim-coffee-script'
+Plug 'altercation/vim-colors-solarized'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-endwise'
+Plug 'isRuslan/vim-es6'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'vim-ruby/vim-ruby'
+Plug 'slim-template/vim-slim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
+Plug 'airblade/vim-gitgutter'
+Plug 'janko-m/vim-test'
+"Plug 'Valloric/YouCompleteMe'
+Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
+"Plug 'wfleming/vim-codeclimate'
 
-set relativenumber "display line numbers"
-" set number "display line numbers"
-set incsearch
+call plug#end()
+
+filetype off
 set relativenumber
+set incsearch
 set colorcolumn=80
 set ruler
 set nowrap
-"set cursorline
 set autoindent
 syntax enable
 
-" Whitespace Stuff
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -23,10 +42,8 @@ set backspace=indent,eol,start
 set expandtab
 set list listchars=tab:\ \ ,trail:·
 
-" search
 set hlsearch
 
-" Tab Completion
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
 function! CleverTab()
@@ -38,13 +55,6 @@ function! CleverTab()
 endfunction
 inoremap <Tab> <C-R>=CleverTab()<CR>
 
-" Handlebars Abbreviations
-let g:mustache_abbreviations = 1
-
-" Force Syntastic to Use RVM Managed Ruby Executable
-"let g:syntastic_ruby_mri_exec = '~/.rvm/rubies/ruby-2.1.6/bin/ruby'
-
-" Ctrl P ignore
 set wildignore+=*/vendor/*,*/tmp/*,*/dist/*,*/node_modules/*,*.so,*.swp,*.zip     " MacOSX/Linux
 
 "disable arrow keys in insert mode
@@ -70,9 +80,7 @@ command! Rubyw :w | :! ruby -cw %
 filetype plugin indent on     " required!
 filetype plugin on
 
-autocmd! bufwritepost .vimrc source ~./vimrc
-
-:imap jj <Esc>
+imap jj <Esc>
 " Solarized stuff
 let g:solarized_termtrans = 1
 set background=dark
@@ -99,3 +107,11 @@ nmap ga <Plug>(EasyAlign)
 
 " Remove trailing whitespce
 autocmd FileType ruby,c,cpp,java,php autocmd BufWritePre <buffer> %s/\s\+$//e
+
+" Vim Test
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
+let test#strategy = "neovim"
