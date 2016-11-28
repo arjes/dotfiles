@@ -3,7 +3,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'junegunn/vim-easy-align'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
 "Plug 'vim-syntastic/syntastic'
 Plug 'neomake/neomake'
@@ -23,6 +23,7 @@ Plug 'janko-m/vim-test'
 "Plug 'Valloric/YouCompleteMe'
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
 "Plug 'wfleming/vim-codeclimate'
+Plug 'roman/golden-ratio'
 
 call plug#end()
 
@@ -97,8 +98,8 @@ command! -bar -range RubyHashSyntaxToggle <line1>,<line2>call s:RubyHashSyntaxTo
 noremap <Leader>rh :RubyHashSyntaxToggle<CR>
 nmap <leader>nt :NERDTreeToggle<cr>
 
-let &winwidth = &columns * 6 / 10
-let &winheight = &lines * 6 / 10
+"let &winwidth = &columns * 6 / 10
+"let &winheight = &lines * 6 / 10
 
 
 " Alignment stuffs
