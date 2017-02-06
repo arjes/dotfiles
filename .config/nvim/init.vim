@@ -5,7 +5,7 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'junegunn/vim-easy-align'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
-"Plug 'vim-syntastic/syntastic'
+Plug 'vim-syntastic/syntastic'
 Plug 'neomake/neomake'
 Plug 'kchmck/vim-coffee-script'
 Plug 'altercation/vim-colors-solarized'
@@ -23,7 +23,12 @@ Plug 'janko-m/vim-test'
 "Plug 'Valloric/YouCompleteMe'
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
 "Plug 'wfleming/vim-codeclimate'
-Plug 'roman/golden-ratio'
+Plug 'ElmCast/elm-vim'
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'Quramy/vim-js-pretty-template', { 'for': 'typescript' }
+Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
 
@@ -107,7 +112,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " Remove trailing whitespce
-autocmd FileType ruby,c,cpp,java,php autocmd BufWritePre <buffer> %s/\s\+$//e
+autocmd FileType typescript,ruby,c,cpp,java,php autocmd BufWritePre <buffer> %s/\s\+$//e
 
 " Vim Test
 nmap <silent> <leader>t :TestNearest<CR>
@@ -129,4 +134,16 @@ nnoremap  <leader>Y  "+yg_
 nnoremap  <leader>y  "+y
 nnoremap  <leader>yy  "+yy
 
+" Typescript
+let g:typescript_compiler_binary = 'tsc'
+let g:typescript_compiler_options = ''
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
+autocmd FileType typescript JsPreTmpl html
+autocmd FileType typescript syn clear foldBraces
+autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
+
+autocmd FileType typescript nmap <buffer> <Leader>i : <C-u>echo tsuquyomi#hint()<CR>
 

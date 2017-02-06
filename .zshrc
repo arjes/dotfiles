@@ -60,6 +60,8 @@ eval "$(rbenv init -)"
 export PATH="./bin:$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
 alias sforeman="foreman start | tee -a log/foreman.log"
 
+export PATH="$PATH:`yarn global bin`"
+
 if type "nvim" > /dev/null; then
   alias vim="nvim"
   alias vi="nvim"
