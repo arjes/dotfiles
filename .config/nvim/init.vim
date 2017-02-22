@@ -20,7 +20,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'airblade/vim-gitgutter'
 Plug 'janko-m/vim-test'
-"Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
 "Plug 'wfleming/vim-codeclimate'
 Plug 'ElmCast/elm-vim'
@@ -29,6 +29,8 @@ Plug 'Quramy/vim-js-pretty-template', { 'for': 'typescript' }
 Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'jiangmiao/auto-pairs'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 call plug#end()
 
@@ -59,7 +61,7 @@ function! CleverTab()
     return "\<C-P>"
   endif
 endfunction
-inoremap <Tab> <C-R>=CleverTab()<CR>
+"inoremap <Tab> <C-R>=CleverTab()<CR>
 
 set wildignore+=*/vendor/*,*/tmp/*,*/dist/*,*/node_modules/*,*.so,*.swp,*.zip     " MacOSX/Linux
 
@@ -77,8 +79,8 @@ map <right> <nop>
 " Ctrl-j/k deletes line below/above, and Alt-j/k inserts.
 nnoremap <silent><C-j> m`:silent +g/.*/d<CR>``:noh<CR>
 nnoremap <silent><C-k> m`:silent -g/.*/d<CR>``:noh<CR>
-nnoremap <silent><Tab>j :set paste<CR>m`o<Esc>``:set nopaste<CR>
-nnoremap <silent><Tab>k :set paste<CR>m`O<Esc>``:set nopaste<CR>
+"nnoremap <silent><Tab>j :set paste<CR>m`o<Esc>``:set nopaste<CR>
+"nnoremap <silent><Tab>k :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 " save and check ruby syntax
 command! Rubyw :w | :! ruby -cw %
@@ -146,3 +148,6 @@ let g:tsuquyomi_disable_quickfix = 1
 let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
 
 autocmd FileType typescript nmap <buffer> <Leader>i : <C-u>echo tsuquyomi#hint()<CR>
+
+" Snippets
+let g:UltiSnipsExpandTrigger='<Tab>c'
