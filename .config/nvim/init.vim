@@ -22,6 +22,8 @@ Plug 'tpope/vim-repeat'
 Plug 'airblade/vim-gitgutter'
 Plug 'janko-m/vim-test'
 "Plug 'Valloric/YouCompleteMe'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
 
 Plug 'sjl/gundo.vim'
 Plug 'vim-airline/vim-airline'
@@ -68,11 +70,11 @@ set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
 function! CleverTab()
   if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
     return "\<Tab>"
-  else
+
     return "\<C-P>"
   endif
 endfunction
-inoremap <Tab> <C-R>=CleverTab()<CR>
+"inoremap <Tab> <C-R>=CleverTab()<CR>
 
 set wildignore+=*/vendor/*,*/tmp/*,*/dist/*,*/node_modules/*,*.so,*.swp,*.zip     " MacOSX/Linux
 
@@ -125,7 +127,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " Remove trailing whitespce
-"autocmd FileType typescript,ruby,c,cpp,java,php autocmd BufWritePre <buffer> %s/\s\+$//e
+autocmd FileType typescript,ruby,c,cpp,java,php autocmd BufWritePre <buffer> %s/\s\+$//e
 
 " Vim Test
 nmap <silent> <leader>t :TestNearest<CR>
@@ -166,8 +168,15 @@ autocmd FileType typescript nmap <buffer> <Leader>i : <C-u>echo tsuquyomi#hint()
 "let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Deoplete
-"let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_delay = 50
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Neomake
 autocmd! BufWritePost * Neomake
 
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1 
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+
+set t_Co=256
