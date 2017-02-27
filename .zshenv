@@ -1,4 +1,10 @@
 
+# This was taken out of /etc/zprofile because it was screwing with
+# load orders
+if [ -x /usr/libexec/path_helper ]; then
+	eval `/usr/libexec/path_helper -s`
+fi
+
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
