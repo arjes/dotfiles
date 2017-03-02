@@ -1,6 +1,7 @@
 let g:python_host_prog='/usr/local/bin/python'
 call plug#begin('~/.vim/plugged')
 
+Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'junegunn/vim-easy-align'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -8,13 +9,11 @@ Plug 'scrooloose/nerdcommenter'
 "Plug 'vim-syntastic/syntastic'
 Plug 'neomake/neomake'
 
-Plug 'kchmck/vim-coffee-script'
 Plug 'altercation/vim-colors-solarized'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-endwise'
-Plug 'isRuslan/vim-es6'
+"Plug 'isRuslan/vim-es6'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'slim-template/vim-slim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
@@ -29,15 +28,13 @@ Plug 'sjl/gundo.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
 Plug 'ecomba/vim-ruby-refactoring', { 'for': 'ruby' }
 Plug 'tpope/vim-rbenv', { 'for': 'ruby' }
 
 "Plug 'wfleming/vim-codeclimate'
-Plug 'ElmCast/elm-vim', {'for': 'elm'}
+"Plug 'ElmCast/elm-vim', {'for': 'elm'}
 
-Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'Quramy/vim-js-pretty-template', { 'for': 'typescript' }
 Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
