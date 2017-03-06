@@ -124,7 +124,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " Remove trailing whitespce
-autocmd FileType typescript,ruby,c,cpp,java,php autocmd BufWritePre <buffer> %s/\s\+$//e
+autocmd FileType typescript,eruby,ruby,c,cpp,java,php autocmd BufWritePre <buffer> %s/\s\+$//e
 
 " Vim Test
 nmap <silent> <leader>t :TestNearest<CR>
