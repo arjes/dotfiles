@@ -42,6 +42,7 @@ Plug 'jiangmiao/auto-pairs'
 "Plug 'SirVer/ultisnips'
 "Plug 'honza/vim-snippets'
 
+Plug 'nathanaelkane/vim-indent-guides'
 call plug#end()
 
 filetype off
@@ -177,3 +178,12 @@ autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 set t_Co=256
+
+" GUndo
+:nnoremap <leader>u :GundoToggle<CR>
+
+" vimrc helpers
+nnoremap <leader>evc :edit $MYVIMRC<CR>
+nnoremap <leader>rvc :source $MYVIMRC<CR>
+inoremap jk <esc>
+inoremap <esc> <nop>
