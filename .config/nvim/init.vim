@@ -1,4 +1,6 @@
 let g:python_host_prog='/usr/local/bin/python'
+
+" Plugin Installation ---------------------- {{{
 call plug#begin('~/.vim/plugged')
 
 Plug 'sheerun/vim-polyglot'
@@ -44,6 +46,7 @@ Plug 'jiangmiao/auto-pairs'
 
 Plug 'nathanaelkane/vim-indent-guides'
 call plug#end()
+" }}}
 
 filetype off
 set relativenumber
@@ -93,8 +96,6 @@ nnoremap <silent><C-k> m`:silent -g/.*/d<CR>``:noh<CR>
 nnoremap <silent><Tab>j :set paste<CR>m`o<Esc>``:set nopaste<CR>
 nnoremap <silent><Tab>k :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
-" save and check ruby syntax
-command! Rubyw :w | :! ruby -cw %
 
 filetype plugin indent on     " required!
 filetype plugin on
@@ -105,6 +106,8 @@ let g:solarized_termtrans = 1
 set background=dark
 colorscheme solarized
 
+
+" Ruby Filetype ---------------------- {{{
 function! s:RubyHashSyntaxToggle() range
   if join(getline(a:firstline, a:lastline)) =~# '=>'
     silent! execute a:firstline . ',' . a:lastline . 's/[^{,]*[{,]\?\zs:\([^: ]\+\)\s*=>/\1: /g'
@@ -114,10 +117,15 @@ function! s:RubyHashSyntaxToggle() range
 endfunction
 command! -bar -range RubyHashSyntaxToggle <line1>,<line2>call s:RubyHashSyntaxToggle()
 noremap <Leader>rh :RubyHashSyntaxToggle<CR>
-nmap <leader>nt :NERDTreeToggle<cr>
 
-"let &winwidth = &columns * 6 / 10
-"let &winheight = &lines * 6 / 10
+" save and check ruby syntax
+command! Rubyw :w | :! ruby -cw %
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+" }}}
+
+nmap <leader>nt :NERDTreeToggle<cr>
 
 
 " Alignment stuffs
@@ -125,7 +133,10 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " Remove trailing whitespce
+augroup clearTrailingWhitespace
+autocmd!
 autocmd FileType typescript,eruby,ruby,c,cpp,java,php autocmd BufWritePre <buffer> %s/\s\+$//e
+augroup END
 
 " Vim Test
 nmap <silent> <leader>t :TestNearest<CR>
@@ -176,17 +187,22 @@ augroup neomake
   autocmd BufWritePost * Neomake
 augroup END
 
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1 
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 set t_Co=256
 
 " GUndo
-:nnoremap <leader>u :GundoToggle<CR>
+nnoremap <leader>u :GundoToggle<CR>
 
-" vimrc helpers
+" vimrc helpers---------------------- {{{
 nnoremap <leader>evc :edit $MYVIMRC<CR>
 nnoremap <leader>rvc :source $MYVIMRC<CR>
 inoremap jk <esc>
 inoremap <esc> <nop>
+" }}}
+
+" Vimscript file settings ---------------------- {{{
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
