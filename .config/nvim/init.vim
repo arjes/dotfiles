@@ -119,10 +119,14 @@ command! -bar -range RubyHashSyntaxToggle <line1>,<line2>call s:RubyHashSyntaxTo
 noremap <Leader>rh :RubyHashSyntaxToggle<CR>
 
 " save and check ruby syntax
+augroup rubyAutoCommands
 command! Rubyw :w | :! ruby -cw %
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+autocmd FileType ruby set foldmethod=syntax
+autocmd FileType eruby set foldmethod=indent
+augroup END
 " }}}
 
 nmap <leader>nt :NERDTreeToggle<cr>
@@ -187,8 +191,7 @@ augroup neomake
   autocmd BufWritePost * Neomake
 augroup END
 
-
-set t_Co=256
+"set t_Co=256
 
 " GUndo
 nnoremap <leader>u :GundoToggle<CR>
