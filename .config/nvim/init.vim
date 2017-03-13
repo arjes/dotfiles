@@ -50,7 +50,6 @@ call plug#end()
 
 filetype off
 set relativenumber
-set incsearch
 set colorcolumn=80
 set ruler
 set nowrap
@@ -65,6 +64,7 @@ set expandtab
 set list listchars=tab:\ \ ,trail:·
 
 set hlsearch
+set incsearch
 
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
@@ -162,7 +162,8 @@ nnoremap  <leader>Y  "+yg_
 nnoremap  <leader>y  "+y
 nnoremap  <leader>yy  "+yy
 
-" Typescript
+
+" Typescript ---------------------- {{{
 let g:typescript_compiler_binary = 'tsc'
 let g:typescript_compiler_options = ''
 autocmd QuickFixCmdPost [^l]* nested cwindow
@@ -174,11 +175,7 @@ let g:tsuquyomi_disable_quickfix = 1
 let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
 
 autocmd FileType typescript nmap <buffer> <Leader>i : <C-u>echo tsuquyomi#hint()<CR>
-
-" Snippets
-"let g:UltiSnipsExpandTrigger='<Tab>c'
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" }}}
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
@@ -191,7 +188,6 @@ augroup neomake
   autocmd BufWritePost * Neomake
 augroup END
 
-"set t_Co=256
 
 " GUndo
 nnoremap <leader>u :GundoToggle<CR>
@@ -207,5 +203,17 @@ inoremap <esc> <nop>
 augroup filetype_vim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
+
+" Auto Debugger Insert ---------------------- {{{
+augroup autoDebugger
+  autocmd!
+  autocmd FileType ruby noremap <leader>d Obinding.pry<esc>==
+  autocmd FileType ruby inoremap <leader>d <esc>Obinding.pry<esc>==i
+  autocmd FileType ruby iabbrev <buffer> binding TRYAGAIN
+
+  autocmd FileType ruby nnoremap <leader>pd yiwOputs <esc>p
+  autocmd FileType ruby inoremap <leader>pd <esc>yiwOputs <esc>p
 augroup END
 " }}}
