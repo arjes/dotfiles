@@ -48,7 +48,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 call plug#end()
 " }}}
 
-filetype off
+"filetype off
 set relativenumber
 set colorcolumn=80
 set ruler
@@ -100,12 +100,17 @@ nnoremap <silent><Tab>k :set paste<CR>m`O<Esc>``:set nopaste<CR>
 filetype plugin indent on     " required!
 filetype plugin on
 
-imap jj <Esc>
+" Color Theme ---------------------- {{{
 " Solarized stuff
 let g:solarized_termtrans = 1
-set background=dark
+" Setting backgroudn to light to keep Flux Readable
+if strftime("%H") > 20 || strftime("%H") < 8
+  set background=light
+else
+  set background=dark
+endif
 colorscheme solarized
-
+" }}}
 
 " Ruby Filetype ---------------------- {{{
 function! s:RubyHashSyntaxToggle() range
@@ -217,3 +222,5 @@ augroup autoDebugger
   autocmd FileType ruby inoremap <leader>pd <esc>yiwOputs <esc>p
 augroup END
 " }}}
+
+

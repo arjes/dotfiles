@@ -62,3 +62,5 @@ if type "nvim" > /dev/null; then
   alias vim="nvim"
   alias vi="nvim"
 fi
+
+export PATH="$HOME/.yarn/bin:$PATH"
