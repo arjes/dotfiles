@@ -99,3 +99,10 @@ nmap ga <Plug>(EasyAlign)
 
 " Remove trailing whitespce
 autocmd FileType ruby,c,cpp,java,php autocmd BufWritePre <buffer> %s/\s\+$//e
+
+" Setting backgroudn to light to keep Flux Readable
+if strftime("%H") > 20
+  set background=light
+else
+  set background=dark
+endif

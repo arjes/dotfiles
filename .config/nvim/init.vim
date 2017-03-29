@@ -226,3 +226,8 @@ augroup END
 " }}}
 
 
+" Auto Debugger Insert ---------------------- {{{
+noremap <leader>. :CtrlPTag<cr>
+" }}}
+
+
