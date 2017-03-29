@@ -64,3 +64,7 @@ if type "nvim" > /dev/null; then
 fi
 
 export PATH="$HOME/.yarn/bin:$PATH"
+
+eval "$(ssh-agent -s)"
+#add ssh key to keychain automatically
+ssh-add ~/.ssh/id_rsa

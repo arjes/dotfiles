@@ -104,7 +104,7 @@ filetype plugin on
 " Solarized stuff
 let g:solarized_termtrans = 1
 " Setting backgroudn to light to keep Flux Readable
-if strftime("%H") > 20 || strftime("%H") < 8
+if strftime("%H") > 20 || strftime("%H") < 7
   set background=light
 else
   set background=dark
@@ -129,8 +129,10 @@ command! Rubyw :w | :! ruby -cw %
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-autocmd FileType ruby set foldmethod=syntax
-autocmd FileType eruby set foldmethod=indent
+autocmd FileType ruby setlocal foldmethod=syntax
+autocmd FileType ruby setlocal foldlevel=199999
+autocmd FileType eruby setlocal  foldmethod=indent
+autocmd FileType eruby setlocal foldlevel=199999
 augroup END
 " }}}
 
@@ -144,7 +146,7 @@ nmap ga <Plug>(EasyAlign)
 " Remove trailing whitespce
 augroup clearTrailingWhitespace
 autocmd!
-autocmd FileType typescript,eruby,ruby,c,cpp,java,php autocmd BufWritePre <buffer> %s/\s\+$//e
+autocmd FileType markdown,typescript,eruby,ruby,c,cpp,java,php autocmd BufWritePre <buffer> %s/\s\+$//e
 augroup END
 
 " Vim Test
