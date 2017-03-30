@@ -10,6 +10,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
 "Plug 'vim-syntastic/syntastic'
 Plug 'neomake/neomake'
+Plug 'mileszs/ack.vim'
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'easymotion/vim-easymotion'
