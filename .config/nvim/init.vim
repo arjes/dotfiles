@@ -134,6 +134,10 @@ autocmd FileType ruby setlocal foldmethod=syntax
 autocmd FileType ruby setlocal foldlevel=199999
 autocmd FileType eruby setlocal  foldmethod=indent
 autocmd FileType eruby setlocal foldlevel=199999
+
+let g:ruby_indent_assignment_style = 'variable'
+let g:ruby_indent_block_style = 'do'
+
 augroup END
 " }}}
 
