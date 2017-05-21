@@ -8,7 +8,7 @@ fi
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
-export PATH="./bin:$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
+export PATH="./node_modules/.bin:./bin:$HOME/.yarn/bin:$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
 
 if type "yarn" > /dev/null; then
   export PATH="$PATH:`yarn global bin`"

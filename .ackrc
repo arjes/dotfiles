@@ -2,3 +2,4 @@
 --ignore-directory=is:bower_components
 --type-set=sass:ext:scss,sass
 --type-set=markdown:ext:md,markdown
+--type-set=typescript:ext:ts

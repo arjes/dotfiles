@@ -63,7 +63,7 @@ if type "nvim" > /dev/null; then
   alias vi="nvim"
 fi
 
-export PATH="$HOME/.yarn/bin:$PATH"
+#export PATH="$HOME/.yarn/bin:$PATH:/usr/local/Cellar/node/7.9.0/bin/"
 
 eval "$(ssh-agent -s)"
 #add ssh key to keychain automatically

@@ -1,16 +1,24 @@
 let g:python_host_prog='/usr/local/bin/python'
 
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 " Plugin Installation ---------------------- {{{
 call plug#begin('~/.vim/plugged')
 
 Plug 'sheerun/vim-polyglot'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on':  [ 'NERDTreeFind', 'NERDTreeToggle' ] }
 Plug 'junegunn/vim-easy-align'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
 "Plug 'vim-syntastic/syntastic'
 Plug 'neomake/neomake'
 Plug 'mileszs/ack.vim'
+Plug 'craigemery/vim-autotag'
+Plug 'vimwiki/vimwiki'
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'easymotion/vim-easymotion'
@@ -40,6 +48,7 @@ Plug 'tpope/vim-rbenv', { 'for': 'ruby' }
 
 Plug 'Quramy/vim-js-pretty-template', { 'for': 'typescript' }
 Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
+Plug 'mhartington/nvim-typescript', { 'ddcommit': '3b71bb975dfef16a40f92aed6656f7d00ec3be68', 'for': 'typescript' }
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'jiangmiao/auto-pairs'
 "Plug 'SirVer/ultisnips'
@@ -78,7 +87,7 @@ function! CleverTab()
 endfunction
 "inoremap <Tab> <C-R>=CleverTab()<CR>
 
-set wildignore+=*/vendor/*,*/tmp/*,*/dist/*,*/node_modules/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*/coverage/*,*/vendor/*,*/tmp/*,*/dist/*,*/node_modules/*,*.so,*.swp,*.zip     " MacOSX/Linux
 
 "disable arrow keys in insert mode
 imap <up> <nop>
@@ -142,6 +151,7 @@ augroup END
 " }}}
 
 nmap <leader>nt :NERDTreeToggle<cr>
+nmap <leader>ntf :NERDTreeFind<cr>
 
 
 " Alignment stuffs
@@ -151,7 +161,7 @@ nmap ga <Plug>(EasyAlign)
 " Remove trailing whitespce
 augroup clearTrailingWhitespace
 autocmd!
-autocmd FileType markdown,typescript,eruby,ruby,c,cpp,java,php autocmd BufWritePre <buffer> %s/\s\+$//e
+autocmd FileType html,markdown,typescript,eruby,ruby,c,cpp,java,php autocmd BufWritePre <buffer> %s/\s\+$//e
 augroup END
 
 " Vim Test
@@ -176,17 +186,30 @@ nnoremap  <leader>yy  "+yy
 
 
 " Typescript ---------------------- {{{
-let g:typescript_compiler_binary = 'tsc'
-let g:typescript_compiler_options = ''
-autocmd QuickFixCmdPost [^l]* nested cwindow
-autocmd QuickFixCmdPost    l* nested lwindow
-autocmd FileType typescript JsPreTmpl html
-autocmd FileType typescript syn clear foldBraces
-autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
-let g:tsuquyomi_disable_quickfix = 1
-let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
+augroup typescriptCommands
+	autocmd!
+	let g:typescript_compiler_binary = 'tsc'
+	let g:typescript_compiler_options = '--noEmit'
+	autocmd FileType typescript JsPreTmpl html
+	autocmd FileType typescript syn clear foldBraces
+  autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
+  let g:tsuquyomi_disable_quickfix = 1
+  let g:tsuquyomi_shortest_import_path = 1
+  let g:tsuquyomi_single_quote_import = 1
+  let g:nvim_typescript#type_info_on_hold = 1
 
-autocmd FileType typescript nmap <buffer> <Leader>i : <C-u>echo tsuquyomi#hint()<CR>
+  "autocmd FileType typescript nmap <buffer> <leader>tr <Plug>(TsuquyomiRenameSymbol)
+  "autocmd FileType typescript nmap <buffer> <leader>tR <Plug>(TsuquyomiRenameSymbolC)
+  "autocmd FileType typescript nmap <buffer> <leader>tu <Plug>(TsuquyomiReferences)
+  "autocmd FileType typescript nmap <buffer> <leader>th :<C-u>echo tsuquyomi#hint()<CR>
+  "autocmd FileType typescript nmap <buffer> K :<C-u>echo tsuquyomi#hint()<CR>
+  autocmd FileType typescript nmap <buffer> <leader>ti <Plug>(TsuquyomiImport)
+  "autocmd FileType typescript autocmd CursorHold <buffer> echo tsuquyomi#hint()
+  "autocmd FileType typescript setlocal updatetime=1000
+
+  "autocmd BufReadPost *.spec.ts set ft=typescript.spec
+
+augroup END
 " }}}
 
 " Deoplete
@@ -195,7 +218,7 @@ let g:deoplete#auto_complete_delay = 50
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Neomake
-augroup neomake
+augroup neomakecmds
   autocmd!
   autocmd BufWritePost * Neomake
 augroup END
@@ -236,3 +259,6 @@ noremap <leader>. :CtrlPTag<cr>
 " }}}
 
 
+" Vim Wiki ---------------------- {{{
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+" }}}
