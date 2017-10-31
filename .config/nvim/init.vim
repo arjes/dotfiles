@@ -67,15 +67,16 @@ call plug#end()
 ""Tests
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {}
-if executable('javascript-typescript-stdio')
+"if executable('~/.langServers/typescript.sh')
   "let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio'] ", '--enable-jaeger']
-  let g:LanguageClient_serverCommands.typescript = ['~/dotfiles/.langServers/typescript.sh'] ", '--enable-jaeger']
+  let g:LanguageClient_serverCommands.typescript = ['~/.langServers/typescript.sh'] ", '--enable-jaeger']
+  let g:LanguageClient_serverCommands.go = ['~/.langServers/go.sh'] 
   " Use LanguageServer for omnifunc completion
-  autocmd FileType typescript setlocal omnifunc=LanguageClient#complete
-  autocmd FileType typescript :LanguageClientStart<cr>
-else
-  echom "javascript-typescript-langserver not installed!\n"
-endif
+  autocmd FileType typescript,go setlocal omnifunc=LanguageClient#complete
+  autocmd FileType typescript,go :LanguageClientStart<cr>
+"else
+"  echom "javascript-typescript-langserver not installed!\n"
+"endif
 
 autocmd FileType typescript nnoremap <buffer>
   \ <leader>ld :call LanguageClient_textDocument_definition()<cr>
