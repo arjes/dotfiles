@@ -9,6 +9,8 @@ endif
 " Plugin Installation ---------------------- {{{
 call plug#begin('~/.vim/plugged')
 
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+
 Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/nerdtree', { 'on':  [ 'NERDTreeFind', 'NERDTreeToggle' ] }
 Plug 'junegunn/vim-easy-align'
@@ -32,12 +34,13 @@ Plug 'tpope/vim-repeat'
 Plug 'airblade/vim-gitgutter'
 Plug 'janko-m/vim-test'
 "Plug 'Valloric/YouCompleteMe'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'roxma/nvim-completion-manager'
 
 
 Plug 'sjl/gundo.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
 Plug 'ecomba/vim-ruby-refactoring', { 'for': 'ruby' }
@@ -48,15 +51,42 @@ Plug 'tpope/vim-rbenv', { 'for': 'ruby' }
 
 Plug 'Quramy/vim-js-pretty-template', { 'for': 'typescript' }
 Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
-Plug 'mhartington/nvim-typescript', { 'ddcommit': '3b71bb975dfef16a40f92aed6656f7d00ec3be68', 'for': 'typescript' }
+Plug 'mhartington/nvim-typescript', { 'commiddt': '3b71bb975dfef16a40f92aed6656f7d00ec3be68', 'for': 'typescript' }
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'jiangmiao/auto-pairs'
 "Plug 'SirVer/ultisnips'
 "Plug 'honza/vim-snippets'
 
 Plug 'nathanaelkane/vim-indent-guides'
+
+
 call plug#end()
-" }}}
+"" }}}
+"
+"
+""Tests
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {}
+if executable('javascript-typescript-stdio')
+  "let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio'] ", '--enable-jaeger']
+  let g:LanguageClient_serverCommands.typescript = ['~/dotfiles/.langServers/typescript.sh'] ", '--enable-jaeger']
+  " Use LanguageServer for omnifunc completion
+  autocmd FileType typescript setlocal omnifunc=LanguageClient#complete
+  autocmd FileType typescript :LanguageClientStart<cr>
+else
+  echom "javascript-typescript-langserver not installed!\n"
+endif
+
+autocmd FileType typescript nnoremap <buffer>
+  \ <leader>ld :call LanguageClient_textDocument_definition()<cr>
+" <leader>lh for type info under cursor
+autocmd FileType typescript nnoremap <buffer>
+  \ <leader>lh :call LanguageClient_textDocument_hover()<cr>
+" <leader>lr to rename variable under cursor
+autocmd FileType typescript nnoremap <buffer>
+  \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
+
+
 
 "filetype off
 set relativenumber
@@ -196,7 +226,7 @@ augroup typescriptCommands
   let g:tsuquyomi_disable_quickfix = 1
   let g:tsuquyomi_shortest_import_path = 1
   let g:tsuquyomi_single_quote_import = 1
-  let g:nvim_typescript#type_info_on_hold = 1
+  "let g:nvim_typescript#type_info_on_hold = 1
 
   "autocmd FileType typescript nmap <buffer> <leader>tr <Plug>(TsuquyomiRenameSymbol)
   "autocmd FileType typescript nmap <buffer> <leader>tR <Plug>(TsuquyomiRenameSymbolC)
@@ -234,6 +264,13 @@ inoremap jk <esc>
 inoremap <esc> <nop>
 " }}}
 
+" Terraform Settings ---------------------- {{{
+augroup filetype_terraform
+    autocmd!
+    autocmd FileType terraform setlocal foldmethod=marker
+augroup END
+" }}}
+    
 " Vimscript file settings ---------------------- {{{
 augroup filetype_vim
     autocmd!
@@ -261,4 +298,14 @@ noremap <leader>. :CtrlPTag<cr>
 
 " Vim Wiki ---------------------- {{{
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+autocmd BufEnter,BufRead */vimwiki/* setlocal spell spelllang=en_us
 " }}}
+
+" Directory Structure ---------------------- {{{
+set undofile " Persistent Undo
+set directory=~/.vim/swap,/tmp
+set backupdir=~/.vim/backup,/tmp
+set undodir=~/.vim/undo,/tmp
+" }}}
+
+

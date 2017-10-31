@@ -1,0 +1,5 @@
+FROM node:latest
+
+RUN npm install -g javascript-typescript-langserver 
+
+ENTRYPOINT /usr/local/bin/javascript-typescript-stdio

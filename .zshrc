@@ -5,6 +5,8 @@ export AWS_SECRET=kevy
 DEFAULT_USER=$USER
 #Karma App Environment Variables
 
+[[ -f ~/.env.machine ]] && source ~/.env.machine
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -63,6 +65,8 @@ if type "nvim" > /dev/null; then
   alias vi="nvim"
 fi
 
+alias cvx-prod="CONVOX_PASSWORD=$LOCAL_CONVOX_PASSWORD convox --rack $LOCAL_CONVOX_RACK_NAME"
+alias cvx-ninja="CONVOX_PASSWORD=$LOCAL_CONVOX_PASSWORD convox --rack nus/ninja-east-1"
 #export PATH="$HOME/.yarn/bin:$PATH:/usr/local/Cellar/node/7.9.0/bin/"
 
 eval "$(ssh-agent -s)"
