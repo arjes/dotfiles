@@ -9,55 +9,62 @@ endif
 " Plugin Installation ---------------------- {{{
 call plug#begin('~/.vim/plugged')
 
+" AutoComplete ----- {{
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'roxma/nvim-completion-manager'
+" }}
+
+" Navigation ------- {{{
+Plug 'scrooloose/nerdtree', { 'on':  [ 'NERDTreeFind', 'NERDTreeToggle' ] }
+Plug 'mileszs/ack.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'sjl/gundo.vim'
+" }}}
 
 Plug 'sheerun/vim-polyglot'
-Plug 'scrooloose/nerdtree', { 'on':  [ 'NERDTreeFind', 'NERDTreeToggle' ] }
 Plug 'junegunn/vim-easy-align'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
-"Plug 'vim-syntastic/syntastic'
 Plug 'neomake/neomake'
-Plug 'mileszs/ack.vim'
 Plug 'craigemery/vim-autotag'
 Plug 'vimwiki/vimwiki'
 
 Plug 'altercation/vim-colors-solarized'
-Plug 'easymotion/vim-easymotion'
+
+" Ruby ------------ {{{
 Plug 'tpope/vim-endwise'
-"Plug 'isRuslan/vim-es6'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-repeat'
-Plug 'airblade/vim-gitgutter'
-Plug 'janko-m/vim-test'
-"Plug 'Valloric/YouCompleteMe'
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'roxma/nvim-completion-manager'
-
-
-Plug 'sjl/gundo.vim'
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
 Plug 'ecomba/vim-ruby-refactoring', { 'for': 'ruby' }
 Plug 'tpope/vim-rbenv', { 'for': 'ruby' }
+" }}}
 
-"Plug 'wfleming/vim-codeclimate'
-"Plug 'ElmCast/elm-vim', {'for': 'elm'}
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'janko-m/vim-test'
 
+" Git ------- {{{
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+" }}}
+
+
+" Typescript -------- {{{
 Plug 'Quramy/vim-js-pretty-template', { 'for': 'typescript' }
 Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
 Plug 'mhartington/nvim-typescript', { 'commiddt': '3b71bb975dfef16a40f92aed6656f7d00ec3be68', 'for': 'typescript' }
+" }}}
+
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'jiangmiao/auto-pairs'
-"Plug 'SirVer/ultisnips'
-"Plug 'honza/vim-snippets'
-
 Plug 'nathanaelkane/vim-indent-guides'
+
+" Snippets ---- {{{
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+" }}}
+
 
 
 call plug#end()
