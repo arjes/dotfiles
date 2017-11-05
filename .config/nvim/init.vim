@@ -65,7 +65,7 @@ Plug 'airblade/vim-gitgutter'
 " Typescript -------- {{{
 Plug 'Quramy/vim-js-pretty-template', { 'for': 'typescript' }
 Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
-Plug 'mhartington/nvim-typescript', { 'commiddt': '3b71bb975dfef16a40f92aed6656f7d00ec3be68', 'for': 'typescript' }
+Plug 'mhartington/nvim-typescript' ", { 'commiddt': '3b71bb975dfef16a40f92aed6656f7d00ec3be68', 'for': 'typescript' }
 " }}}
 
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
@@ -81,22 +81,22 @@ let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {}
 "if executable('~/.langServers/typescript.sh')
   "let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio'] ", '--enable-jaeger']
-  let g:LanguageClient_serverCommands.typescript = ['~/.langServers/typescript.sh'] ", '--enable-jaeger']
+  "let g:LanguageClient_serverCommands.typescript = ['~/.langServers/typescript.sh'] ", '--enable-jaeger']
   let g:LanguageClient_serverCommands.go = ['~/.langServers/go.sh'] 
   " Use LanguageServer for omnifunc completion
-  autocmd FileType typescript,go setlocal omnifunc=LanguageClient#complete
-  autocmd FileType typescript,go :LanguageClientStart<cr>
+  autocmd FileType go setlocal omnifunc=LanguageClient#complete
+  autocmd FileType go :LanguageClientStart<cr>
 "else
 "  echom "javascript-typescript-langserver not installed!\n"
 "endif
 
-autocmd FileType typescript nnoremap <buffer>
+autocmd FileType go nnoremap <buffer>
   \ <leader>ld :call LanguageClient_textDocument_definition()<cr>
 " <leader>lh for type info under cursor
-autocmd FileType typescript nnoremap <buffer>
+autocmd FileType go nnoremap <buffer>
   \ <leader>lh :call LanguageClient_textDocument_hover()<cr>
 " <leader>lr to rename variable under cursor
-autocmd FileType typescript nnoremap <buffer>
+autocmd FileType go nnoremap <buffer>
   \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
 
 " FZF Config ----- {{{
@@ -252,15 +252,15 @@ augroup typescriptCommands
   let g:tsuquyomi_disable_quickfix = 1
   let g:tsuquyomi_shortest_import_path = 1
   let g:tsuquyomi_single_quote_import = 1
-  "let g:nvim_typescript#type_info_on_hold = 1
+  let g:tsuquyomi_completion_detail = 1
+  let g:nvim_typescript#type_info_on_hold = 1
 
-  "autocmd FileType typescript nmap <buffer> <leader>tr <Plug>(TsuquyomiRenameSymbol)
-  "autocmd FileType typescript nmap <buffer> <leader>tR <Plug>(TsuquyomiRenameSymbolC)
+  autocmd FileType typescript nmap <buffer> <leader>lr <Plug>(TsuquyomiRenameSymbol)
+  autocmd FileType typescript nmap <buffer> <leader>lR <Plug>(TsuquyomiRenameSymbolC)
   "autocmd FileType typescript nmap <buffer> <leader>tu <Plug>(TsuquyomiReferences)
-  "autocmd FileType typescript nmap <buffer> <leader>th :<C-u>echo tsuquyomi#hint()<CR>
-  "autocmd FileType typescript nmap <buffer> K :<C-u>echo tsuquyomi#hint()<CR>
-  autocmd FileType typescript nmap <buffer> <leader>ti <Plug>(TsuquyomiImport)
-  "autocmd FileType typescript autocmd CursorHold <buffer> echo tsuquyomi#hint()
+  autocmd FileType typescript nmap <buffer> <leader>ld :<C-u>echo tsuquyomi#hint()<CR>
+  autocmd FileType typescript nmap <buffer> <leader>ti :TsuImport
+  autocmd FileType typescript autocmd CursorHold <buffer> echo tsuquyomi#hint()
   "autocmd FileType typescript setlocal updatetime=1000
 
   "autocmd BufReadPost *.spec.ts set ft=typescript.spec
@@ -269,8 +269,8 @@ augroup END
 " }}}
 
 " Deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_complete_delay = 50
+"let g:deoplete#enable_at_startup = 1
+"let g:deoplete#auto_complete_delay = 50
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Neomake
