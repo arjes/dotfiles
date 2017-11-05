@@ -6,8 +6,17 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+if !executable('ag') &&  executable('brew')
+  silent !brew install the_silver_searcher
+endif
+
 " Plugin Installation ---------------------- {{{
 call plug#begin('~/.vim/plugged')
+
+" Snippets ---- {{{
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+" }}}
 
 " AutoComplete ----- {{
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
@@ -19,11 +28,14 @@ Plug 'scrooloose/nerdtree', { 'on':  [ 'NERDTreeFind', 'NERDTreeToggle' ] }
 Plug 'mileszs/ack.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'sjl/gundo.vim'
+
+"Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 " }}}
 
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/vim-easy-align'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'neomake/neomake'
 Plug 'craigemery/vim-autotag'
@@ -60,13 +72,6 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'jiangmiao/auto-pairs'
 Plug 'nathanaelkane/vim-indent-guides'
 
-" Snippets ---- {{{
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-" }}}
-
-
-
 call plug#end()
 "" }}}
 "
@@ -94,7 +99,20 @@ autocmd FileType typescript nnoremap <buffer>
 autocmd FileType typescript nnoremap <buffer>
   \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
 
+" FZF Config ----- {{{
+let g:fzf_layout = { 'window': '-tabnew' }
+" }}}
 
+" Ack.vim ---- {{{
+let g:ackprg = 'ag --nogroup --nocolor --column'
+" }}}
+" Snippet Hotkey config ---- {{{
+let g:UltiSnipsSnippetsDir='~/.UltiSnips'
+inoremap <leader><tab> <esc>:call UltiSnips#ExpandSnippet()<cr>
+"let g:UltiSnipsExpandTrigger="<C-U>"
+"imap <expr> <CR>  (pumvisible() ?  "\<c-y>\<Plug>(expand_or_nl)" : "\<CR>")
+"imap <expr> <Plug>(expand_or_nl) (cm#completed_is_snippet() ? "\<C-U>":"\<CR>")
+" }}}
 
 "filetype off
 set relativenumber
@@ -317,3 +335,6 @@ set undodir=~/.vim/undo,/tmp
 " }}}
 
 
+" Allow local .nvimrc && Turn on security
+set exrc
+set secure " Should be the last line

@@ -72,3 +72,5 @@ alias cvx-ninja="CONVOX_PASSWORD=$LOCAL_CONVOX_PASSWORD convox --rack nus/ninja-
 eval "$(ssh-agent -s)"
 #add ssh key to keychain automatically
 ssh-add ~/.ssh/id_rsa
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
