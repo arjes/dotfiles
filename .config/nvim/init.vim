@@ -124,7 +124,7 @@ set ruler
 set nowrap
 set autoindent
 syntax enable
-let mapleader='<space>'
+let mapleader="'"
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
