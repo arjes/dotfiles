@@ -51,7 +51,7 @@ Plug 'ecomba/vim-ruby-refactoring', { 'for': 'ruby' }
 Plug 'tpope/vim-rbenv', { 'for': 'ruby' }
 " }}}
 
-Plug 'terryma/vim-multiple-cursors'
+"Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'janko-m/vim-test'
@@ -74,8 +74,8 @@ Plug 'nathanaelkane/vim-indent-guides'
 
 call plug#end()
 "" }}}
-"
-"
+
+
 ""Tests
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {}
@@ -101,6 +101,9 @@ autocmd FileType go nnoremap <buffer>
 
 " FZF Config ----- {{{
 let g:fzf_layout = { 'window': '-tabnew' }
+nmap <leader>fff :Files<cr>
+nmap <leader>ffg :GFiles<cr>
+nmap <leader>ffd :GFiles?<cr>
 " }}}
 
 " Ack.vim ---- {{{
@@ -121,7 +124,7 @@ set ruler
 set nowrap
 set autoindent
 syntax enable
-
+let mapleader='<space>'
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
