@@ -1,0 +1,11 @@
+snippet effect "Create new effect"
+/*
+ * $1 - $2
+ */
+@Effect()
+$1\$ = this.actions$
+  .ofType($3)
+	.switchMap( (action) => {
+	  $0
+	})
+endsnippet

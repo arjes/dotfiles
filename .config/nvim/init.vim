@@ -99,22 +99,23 @@ autocmd FileType go nnoremap <buffer>
 autocmd FileType go nnoremap <buffer>
   \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
 
-" FZF Config ----- {{{
-let g:fzf_layout = { 'window': '-tabnew' }
-nmap <leader>fff :Files<cr>
-nmap <leader>ffg :GFiles<cr>
-nmap <leader>ffd :GFiles?<cr>
-" }}}
-
 " Ack.vim ---- {{{
 let g:ackprg = 'ag --nogroup --nocolor --column'
 " }}}
+
 " Snippet Hotkey config ---- {{{
-let g:UltiSnipsSnippetsDir='~/.UltiSnips'
-inoremap <leader><tab> <esc>:call UltiSnips#ExpandSnippet()<cr>
-"let g:UltiSnipsExpandTrigger="<C-U>"
-"imap <expr> <CR>  (pumvisible() ?  "\<c-y>\<Plug>(expand_or_nl)" : "\<CR>")
+let g:AutoPairsMapCR = 0
+
+let &runtimepath .=',~/.UltiSnips'
+let g:UltiSnipsSnippetsDir='~/.UltiSnips/UltiSnips'
+
+"inoremap <leader><tab> <esc>:call UltiSnips#ExpandSnippet()<cr>
+let g:UltiSnipsExpandTrigger="<C-U>"
 "imap <expr> <Plug>(expand_or_nl) (cm#completed_is_snippet() ? "\<C-U>":"\<CR>")
+"imap <expr> <silent> <cr>  (pumvisible() ? "\<c-y>\<Plug>(cm_inject_snippet)\<Plug>(expand_or_nl)\<Plug>DiscretionaryEnd\<c-r>=AutoPairsReturn()\<cr>" : "\<cr>\<Plug>DiscretionaryEnd\<c-r>=AutoPairsReturn()\<cr>")
+imap <expr> <Plug>(expand_or_nl) (cm#completed_is_snippet() ? "\<C-U>":"\<CR>")
+imap <expr> <silent> <cr>  (pumvisible() ? "\<c-y>\<Plug>(expand_or_nl)\<Plug>DiscretionaryEnd\<c-r>=AutoPairsReturn()\<cr>" : "\<cr>\<Plug>DiscretionaryEnd\<c-r>=AutoPairsReturn()\<cr>")
+
 " }}}
 
 "filetype off
@@ -124,7 +125,8 @@ set ruler
 set nowrap
 set autoindent
 syntax enable
-let mapleader="'"
+nnoremap <SPACE> <Nop>
+let mapleader=" "
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -212,6 +214,13 @@ augroup END
 nmap <leader>nt :NERDTreeToggle<cr>
 nmap <leader>ntf :NERDTreeFind<cr>
 
+" FZF Config ----- {{{
+let g:fzf_layout = { 'window': '-tabnew' }
+nnoremap <leader>ff :Files<cr>
+nnoremap <leader>fg :GFiles<cr>
+nnoremap <leader>fd :GFiles?<cr>
+" }}}
+
 
 " Alignment stuffs
 xmap ga <Plug>(EasyAlign)
@@ -271,6 +280,13 @@ augroup typescriptCommands
 augroup END
 " }}}
 
+" NGRX Helpers ---- {{{
+  autocmd BufReadPost *source.spec.ts :UltiSnipsAddFiletypes source-spec.typescript-spec.typescript.javascript
+  autocmd BufReadPost *effects.spec.ts :UltiSnipsAddFiletypes ngrx-effects-spec.typescript-spec.typescript.javascript
+  autocmd BufReadPost *effects.ts :UltiSnipsAddFiletypes ngrx-effects.typescript-spec.typescript.javascript
+" }}}
+
+
 " Deoplete
 "let g:deoplete#enable_at_startup = 1
 "let g:deoplete#auto_complete_delay = 50
@@ -310,12 +326,21 @@ augroup END
 " Auto Debugger Insert ---------------------- {{{
 augroup autoDebugger
   autocmd!
+  " Ruby
   autocmd FileType ruby noremap <leader>d Obinding.pry<esc>==
-  autocmd FileType ruby inoremap <leader>d <esc>Obinding.pry<esc>==i
-  autocmd FileType ruby iabbrev <buffer> binding TRYAGAIN
+  "autocmd FileType ruby inoremap <leader>d <esc>Obinding.pry<esc>==i
+  "autocmd FileType ruby iabbrev <buffer> binding TRYAGAIN
 
   autocmd FileType ruby nnoremap <leader>pd yiwOputs <esc>p
-  autocmd FileType ruby inoremap <leader>pd <esc>yiwOputs <esc>p
+  "autocmd FileType ruby inoremap <leader>pd <esc>yiwOputs <esc>p
+
+  "typescript
+  autocmd FileType typescript noremap <leader>d Odebugger;<esc>==
+"  autocmd FileType typescript inoremap <leader>d <esc>Odebugger;<esc>==i
+  autocmd FileType typescript iabbrev <buffer> debugger TRYAGAIN
+
+  autocmd FileType typescript nnoremap <leader>pd yiwOconsole.log(<esc>pA)
+"  autocmd FileType typescript inoremap <leader>pd <esc>yiwOconsole.log(<esc>pA)
 augroup END
 " }}}
 
