@@ -127,6 +127,7 @@ set autoindent
 syntax enable
 nnoremap <SPACE> <Nop>
 let mapleader=" "
+set timeoutlen=500
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
