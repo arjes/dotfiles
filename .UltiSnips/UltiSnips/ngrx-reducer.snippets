@@ -1,0 +1,35 @@
+global !p
+def camelizeFilePrefix(fileName, snip, uppercase_first_letter=False):
+	prefix = re.sub('.reducer.ts$', '', snip.fn)
+	ret = re.sub(r"-(\w+)", lambda m: m.group(1).title(), prefix) 
+
+	if uppercase_first_letter:
+	  ret = ret[0].upper() + ret[1:]
+
+	snip.rv = ret
+endglobal
+
+snippet boiler "Reducer boilerplate" 
+
+import { Action } from '@ngrx/store';
+import * as `!p camelizeFilePrefix(fn, snip, True)`Actions from './`!p snip.rv = re.sub('.reducer$', '', snip.basename)`.actions';
+
+export interface `!p camelizeFilePrefix(fn, snip, True)`State {
+  $1
+}
+export const initialState: `!p camelizeFilePrefix(fn, snip, True)`State = {
+  $2
+};
+
+export function `!p camelizeFilePrefix(fn, snip)`Reducer(state = initialState, action: `!p camelizeFilePrefix(fn, snip, True)`.Actions): `!p camelizeFilePrefix(fn, snip, True)`State {
+  switch (action.type) {
+		case `!p camelizeFilePrefix(fn, snip, True)`.ActionTypes.$3: {
+		  $0
+    }																																 }
+    default: {
+      return state;
+    }
+  }
+}
+
+endsnippet

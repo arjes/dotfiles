@@ -1,9 +1,8 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
-export AWS_ID=kevy
-export AWS_SECRET=kevy
 DEFAULT_USER=$USER
-#Karma App Environment Variables
+
+export PATH="${PATH}:${HOME}/bin"
 
 [[ -f ~/.env.machine ]] && source ~/.env.machine
 
@@ -64,12 +63,6 @@ if type "nvim" > /dev/null; then
   alias vim="nvim"
   alias vi="nvim"
 fi
-
-alias cvx-prod="CONVOX_PASSWORD=$LOCAL_CONVOX_PASSWORD convox --rack $LOCAL_CONVOX_RACK_NAME"
-alias cvx-ninja="CONVOX_PASSWORD=$LOCAL_CONVOX_PASSWORD convox --rack nus/ninja-east-1"
-#export PATH="$HOME/.yarn/bin:$PATH:/usr/local/Cellar/node/7.9.0/bin/"
-#
-export PATH="$HOME/.yarn/bin:./node_modules/.bin:$PATH"
 
 eval "$(ssh-agent -s)"
 #add ssh key to keychain automatically
