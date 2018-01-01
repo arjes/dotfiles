@@ -68,6 +68,8 @@ fi
 alias cvx-prod="CONVOX_PASSWORD=$LOCAL_CONVOX_PASSWORD convox --rack $LOCAL_CONVOX_RACK_NAME"
 alias cvx-ninja="CONVOX_PASSWORD=$LOCAL_CONVOX_PASSWORD convox --rack nus/ninja-east-1"
 #export PATH="$HOME/.yarn/bin:$PATH:/usr/local/Cellar/node/7.9.0/bin/"
+#
+export PATH="$HOME/.yarn/bin:./node_modules/.bin:$PATH"
 
 eval "$(ssh-agent -s)"
 #add ssh key to keychain automatically
@@ -75,3 +77,10 @@ ssh-add ~/.ssh/id_rsa
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/brianmalinconico/workspace/dotfiles/.config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/brianmalinconico/workspace/dotfiles/.config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/brianmalinconico/workspace/dotfiles/.config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/brianmalinconico/workspace/dotfiles/.config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
