@@ -18,16 +18,16 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " }}}
 
-" AutoComplete ----- {{
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+" AutoComplete ----- {{{
+"Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'roxma/nvim-completion-manager'
-" }}
+" }}}
 
 " Navigation ------- {{{
 Plug 'scrooloose/nerdtree', { 'on':  [ 'NERDTreeFind', 'NERDTreeToggle' ] }
 Plug 'mileszs/ack.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'sjl/gundo.vim'
+Plug 'simnalamburt/vim-mundo'
 
 "Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -37,8 +37,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdcommenter'
-Plug 'neomake/neomake'
+"Plug 'neomake/neomake'
+Plug 'w0rp/ale'
 Plug 'craigemery/vim-autotag'
+Plug 'majutsushi/tagbar'
 Plug 'vimwiki/vimwiki'
 
 Plug 'altercation/vim-colors-solarized'
@@ -64,13 +66,16 @@ Plug 'airblade/vim-gitgutter'
 
 " Typescript -------- {{{
 Plug 'Quramy/vim-js-pretty-template', { 'for': 'typescript' }
-Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
+"Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
 Plug 'mhartington/nvim-typescript' ", { 'commiddt': '3b71bb975dfef16a40f92aed6656f7d00ec3be68', 'for': 'typescript' }
 " }}}
 
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'jiangmiao/auto-pairs'
-Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'Yggdroot/indentLine'
+Plug 'floobits/floobits-neovim'
+
 
 call plug#end()
 "" }}}
@@ -127,7 +132,7 @@ set autoindent
 syntax enable
 nnoremap <SPACE> <Nop>
 let mapleader=" "
-set timeoutlen=250
+set timeoutlen=500
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -176,11 +181,11 @@ filetype plugin on
 " Solarized stuff
 let g:solarized_termtrans = 1
 " Setting backgroudn to light to keep Flux Readable
-if strftime("%H") > 20 || strftime("%H") < 7
-  set background=light
-else
+"if strftime("%H") > 20 || strftime("%H") < 7
+"  set background=light
+"else
   set background=dark
-endif
+"endif
 colorscheme solarized
 " }}}
 
@@ -268,12 +273,19 @@ augroup typescriptCommands
   let g:tsuquyomi_completion_detail = 1
   let g:nvim_typescript#type_info_on_hold = 1
 
-  autocmd FileType typescript nmap <buffer> <leader>lr <Plug>(TsuquyomiRenameSymbol)
-  autocmd FileType typescript nmap <buffer> <leader>lR <Plug>(TsuquyomiRenameSymbolC)
+
+  autocmd FileType typescript nmap <buffer> lr :TSRename<CR>
+  autocmd FileType typescript nmap <buffer> lf :TSRefs<CR>
+  autocmd FileType typescript nmap <buffer> ld :TSTypeDef<CR>
+  autocmd FileType typescript nmap <buffer> lds :TSDefPreview<CR>
+  autocmd FileType typescript nmap <buffer> ti :TSImport<CR>
+
+  "autocmd FileType typescript nmap <buffer> <leader>lr <Plug>(TsuquyomiRenameSymbol)
+  "autocmd FileType typescript nmap <buffer> <leader>lR <Plug>(TsuquyomiRenameSymbolC)
   "autocmd FileType typescript nmap <buffer> <leader>tu <Plug>(TsuquyomiReferences)
-  autocmd FileType typescript nmap <buffer> <leader>ld :<C-u>echo tsuquyomi#hint()<CR>
-  autocmd FileType typescript nmap <buffer> <leader>ti :TsuImport
-  autocmd FileType typescript autocmd CursorHold <buffer> echo tsuquyomi#hint()
+  "autocmd FileType typescript nmap <buffer> <leader>ld :<C-u>echo tsuquyomi#hint()<CR>
+  "autocmd FileType typescript nmap <buffer> <leader>ti :TsuImport<CR>
+  "autocmd FileType typescript autocmd CursorHold <buffer> echo tsuquyomi#hint()
   "autocmd FileType typescript setlocal updatetime=1000
 
   "autocmd BufReadPost *.spec.ts set ft=typescript.spec
@@ -285,6 +297,10 @@ augroup END
   autocmd BufReadPost *source.spec.ts :UltiSnipsAddFiletypes source-spec.typescript-spec.typescript.javascript
   autocmd BufReadPost *effects.spec.ts :UltiSnipsAddFiletypes ngrx-effects-spec.typescript-spec.typescript.javascript
   autocmd BufReadPost *effects.ts :UltiSnipsAddFiletypes ngrx-effects.typescript-spec.typescript.javascript
+  autocmd BufReadPost *reducer.ts :UltiSnipsAddFiletypes ngrx-reducer.typescript-spec.typescript.javascript
+  autocmd BufReadPost *actions.ts :UltiSnipsAddFiletypes ngrx-actions.typescript-spec.typescript.javascript
+  autocmd BufReadPost */containers/*component.ts :UltiSnipsAddFiletypes ngrx-containers.typescript-spec.typescript.javascript
+  autocmd BufReadPost */component/*component.ts :UltiSnipsAddFiletypes ngrx-containers.typescript-spec.typescript.javascript
 " }}}
 
 
@@ -294,14 +310,16 @@ augroup END
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Neomake
-augroup neomakecmds
-  autocmd!
-  autocmd BufWritePost * Neomake
-augroup END
+" augroup neomakecmds
+"   autocmd!
+"   autocmd BufWritePost * Neomake
+" augroup END
 
 
+"Indent Guides
+"nnoremap <leader>ig :IndentLinesToggle<CR>
 " GUndo
-nnoremap <leader>u :GundoToggle<CR>
+nnoremap <leader>u :MundoToggle<CR>
 
 " vimrc helpers---------------------- {{{
 nnoremap <leader>evc :edit $MYVIMRC<CR>
@@ -362,7 +380,6 @@ set directory=~/.vim/swap,/tmp
 set backupdir=~/.vim/backup,/tmp
 set undodir=~/.vim/undo,/tmp
 " }}}
-
 
 " Allow local .nvimrc && Turn on security
 set exrc
