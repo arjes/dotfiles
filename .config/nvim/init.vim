@@ -1,4 +1,5 @@
-let g:python_host_prog='/usr/local/bin/python'
+let g:python3_host_prog='/usr/local/bin/python3'
+let g:python2_host_prog='/usr/local/Cellar/python@2/2.7.14_3/bin/python2'
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -18,11 +19,6 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " }}}
 
-" AutoComplete ----- {{{
-"Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-Plug 'roxma/nvim-completion-manager'
-" }}}
-
 " Navigation ------- {{{
 Plug 'scrooloose/nerdtree', { 'on':  [ 'NERDTreeFind', 'NERDTreeToggle' ] }
 Plug 'mileszs/ack.vim'
@@ -39,18 +35,18 @@ Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdcommenter'
 "Plug 'neomake/neomake'
 Plug 'w0rp/ale'
-Plug 'craigemery/vim-autotag'
-Plug 'majutsushi/tagbar'
 Plug 'vimwiki/vimwiki'
 
 Plug 'altercation/vim-colors-solarized'
+
+Plug 'fatih/vim-go'
+Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
 
 " Ruby ------------ {{{
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-rails'
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
-Plug 'ecomba/vim-ruby-refactoring', { 'for': 'ruby' }
-Plug 'tpope/vim-rbenv', { 'for': 'ruby' }
+"Plug 'ecomba/vim-ruby-refactoring', { 'for': 'ruby' }
 " }}}
 
 "Plug 'terryma/vim-multiple-cursors'
@@ -63,18 +59,28 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 " }}}
 
+" CodeCoverae ------- {{{
+"Plug 'ruanyl/coverage.vim'
+" }}}
+
 
 " Typescript -------- {{{
-Plug 'Quramy/vim-js-pretty-template', { 'for': 'typescript' }
+"Plug 'Quramy/vim-js-pretty-template', { 'for': 'typescript' }
 "Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
-Plug 'mhartington/nvim-typescript' ", { 'commiddt': '3b71bb975dfef16a40f92aed6656f7d00ec3be68', 'for': 'typescript' }
+"Plug 'mhartington/nvim-typescript' ", { 'commit': '3b71bb975dfef16a40f92aed6656f7d00ec3be68', 'for': 'typescript' }
+Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
+
 " }}}
 
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'jiangmiao/auto-pairs'
 "Plug 'nathanaelkane/vim-indent-guides'
 "Plug 'Yggdroot/indentLine'
-Plug 'floobits/floobits-neovim'
+"Plug 'floobits/floobits-neovim'
+
+" AutoComplete ----- {{{
+Plug 'roxma/nvim-completion-manager'
+" }}}
 
 
 call plug#end()
@@ -82,27 +88,7 @@ call plug#end()
 
 
 ""Tests
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_serverCommands = {}
-"if executable('~/.langServers/typescript.sh')
-  "let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio'] ", '--enable-jaeger']
-  "let g:LanguageClient_serverCommands.typescript = ['~/.langServers/typescript.sh'] ", '--enable-jaeger']
-  let g:LanguageClient_serverCommands.go = ['~/.langServers/go.sh'] 
-  " Use LanguageServer for omnifunc completion
-  autocmd FileType go setlocal omnifunc=LanguageClient#complete
-  autocmd FileType go :LanguageClientStart<cr>
-"else
-"  echom "javascript-typescript-langserver not installed!\n"
-"endif
 
-autocmd FileType go nnoremap <buffer>
-  \ <leader>ld :call LanguageClient_textDocument_definition()<cr>
-" <leader>lh for type info under cursor
-autocmd FileType go nnoremap <buffer>
-  \ <leader>lh :call LanguageClient_textDocument_hover()<cr>
-" <leader>lr to rename variable under cursor
-autocmd FileType go nnoremap <buffer>
-  \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
 
 " Ack.vim ---- {{{
 let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -142,6 +128,8 @@ set list listchars=tab:\ \ ,trail:·
 
 set hlsearch
 set incsearch
+
+set spell spelllang=en_us
 
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
@@ -211,14 +199,16 @@ autocmd FileType ruby setlocal foldlevel=199999
 autocmd FileType eruby setlocal  foldmethod=indent
 autocmd FileType eruby setlocal foldlevel=199999
 
-let g:ruby_indent_assignment_style = 'variable'
-let g:ruby_indent_block_style = 'do'
+let ruby_spellcheck_strings = 1
+"let g:ruby_indent_assignment_style = 'variable'
+"let g:ruby_indent_block_style = 'do'
+
 
 augroup END
 " }}}
 
 nmap <leader>nt :NERDTreeToggle<cr>
-nmap <leader>ntf :NERDTreeFind<cr>
+nmap <leader>fnt :NERDTreeFind<cr>
 
 " FZF Config ----- {{{
 let g:fzf_layout = { 'window': '-tabnew' }
@@ -235,7 +225,7 @@ nmap ga <Plug>(EasyAlign)
 " Remove trailing whitespce
 augroup clearTrailingWhitespace
 autocmd!
-autocmd FileType html,markdown,typescript,eruby,ruby,c,cpp,java,php autocmd BufWritePre <buffer> %s/\s\+$//e
+autocmd FileType go,html,markdown,typescript,eruby,ruby,c,cpp,java,php autocmd BufWritePre <buffer> %s/\s\+$//e
 augroup END
 
 " Vim Test
@@ -258,13 +248,51 @@ nnoremap  <leader>Y  "+yg_
 nnoremap  <leader>y  "+y
 nnoremap  <leader>yy  "+yy
 
+" Ale Config ------- {{{
+"
+" Error and warning signs.
+let g:ale_sign_error = '⤫'
+let g:ale_sign_warning = '⚠'
+
+augroup aleCommands
+autocmd!
+let g:ale_fixers = {
+\   'ruby': ['rubocop'],
+\   'typescript': ['tslint'],
+\}
+
+
+nmap <silent> <leader>af :ALEFix<cr>
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+augroup END
+" }}}
+
+" Golang ------------------- {{{
+augroup golangCommands
+  autocmd FileType go set noexpandtab
+  autocmd FileType go set shiftwidth=4
+  autocmd FileType go set softtabstop=4
+  autocmd FileType go set tabstop=4
+  let g:go_highlight_build_constraints = 1
+  let g:go_highlight_extra_types = 1
+  let g:go_highlight_fields = 1
+  let g:go_highlight_functions = 1
+  let g:go_highlight_methods = 1
+  let g:go_highlight_operators = 1
+  let g:go_highlight_structs = 1
+  let g:go_highlight_types = 1
+  "let g:go_auto_sameids = 1
+  let g:go_fmt_command = "goimports"
+augroup END
+" }}}
 
 " Typescript ---------------------- {{{
 augroup typescriptCommands
 	autocmd!
 	let g:typescript_compiler_binary = 'tsc'
 	let g:typescript_compiler_options = '--noEmit'
-	autocmd FileType typescript JsPreTmpl html
+	"autocmd FileType typescript JsPreTmpl html
 	autocmd FileType typescript syn clear foldBraces
   autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
   let g:tsuquyomi_disable_quickfix = 1
@@ -273,12 +301,18 @@ augroup typescriptCommands
   let g:tsuquyomi_completion_detail = 1
   let g:nvim_typescript#type_info_on_hold = 1
 
+  let g:coverage_json_report_path = 'coverage/coverage-final.json'
 
   autocmd FileType typescript nmap <buffer> lr :TSRename<CR>
   autocmd FileType typescript nmap <buffer> lf :TSRefs<CR>
   autocmd FileType typescript nmap <buffer> ld :TSTypeDef<CR>
   autocmd FileType typescript nmap <buffer> lds :TSDefPreview<CR>
   autocmd FileType typescript nmap <buffer> ti :TSImport<CR>
+
+  autocmd FileType typescript syn region typescriptStringD start=+"+ skip=+\\\\\|\\"+ end=+"\|$+  contains=@Spell,typescriptSpecial,@htmlPreproc extend
+  autocmd FileType typescript syn region typescriptStringS start=+'+ skip=+\\\\\|\\'+ end=+'\|$+  contains=@Spell,typescriptSpecial,@htmlPreproc extend
+  autocmd FileType typescript syn region typescriptStringB start=+`+ skip=+\\\\\|\\`+ end=+`+  contains=@Spell,typescriptInterpolation,typescriptSpecial,@htmlPreproc extend
+
 
   "autocmd FileType typescript nmap <buffer> <leader>lr <Plug>(TsuquyomiRenameSymbol)
   "autocmd FileType typescript nmap <buffer> <leader>lR <Plug>(TsuquyomiRenameSymbolC)
@@ -363,12 +397,6 @@ augroup autoDebugger
 augroup END
 " }}}
 
-
-" Auto Debugger Insert ---------------------- {{{
-noremap <leader>. :CtrlPTag<cr>
-" }}}
-
-
 " Vim Wiki ---------------------- {{{
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 autocmd BufEnter,BufRead */vimwiki/* setlocal spell spelllang=en_us
@@ -380,6 +408,9 @@ set directory=~/.vim/swap,/tmp
 set backupdir=~/.vim/backup,/tmp
 set undodir=~/.vim/undo,/tmp
 " }}}
+
+" Create file under cursor
+map <leader>gf :e %:h<cfile><cr>
 
 " Allow local .nvimrc && Turn on security
 set exrc
