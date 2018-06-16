@@ -2,8 +2,6 @@
 ZSH=$HOME/.oh-my-zsh
 DEFAULT_USER=$USER
 
-export PATH="${PATH}:${HOME}/bin"
-
 [[ -f ~/.env.machine ]] && source ~/.env.machine
 
 # Set name of the theme to load.
@@ -64,9 +62,9 @@ if type "nvim" > /dev/null; then
   alias vi="nvim"
 fi
 
-eval "$(ssh-agent -s)"
+eval "$(ssh-agent -s)" > /dev/null
 #add ssh key to keychain automatically
-ssh-add ~/.ssh/id_rsa
+ssh-add ~/.ssh/id_rsa &> /dev/null
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
@@ -77,3 +75,7 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /Users/brianmalinconico/workspace/dotfiles/.config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/brianmalinconico/workspace/dotfiles/.config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+
+eval "$(rbenv init -)"
+
+export PATH="./node_modules/.bin/tsc:${PATH}:${HOME}/bin"
