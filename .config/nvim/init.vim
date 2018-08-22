@@ -40,7 +40,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'altercation/vim-colors-solarized'
 
 Plug 'fatih/vim-go'
-Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
+"Plug 'mdempsky/gocode', { 'rtp': 'nvim', 'do': './nvim/symlink.sh' }
 
 " Ruby ------------ {{{
 Plug 'tpope/vim-endwise'
@@ -79,7 +79,14 @@ Plug 'jiangmiao/auto-pairs'
 "Plug 'floobits/floobits-neovim'
 
 " AutoComplete ----- {{{
-Plug 'roxma/nvim-completion-manager'
+" Previous nvim-completion-manager
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-tmux'
+Plug 'filipekiss/ncm2-look.vim'
+Plug 'ncm2/ncm2-go'
 " }}}
 
 
@@ -89,6 +96,10 @@ call plug#end()
 
 ""Tests
 
+" NCM2 --- {{{
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+" }}}
 
 " Ack.vim ---- {{{
 let g:ackprg = 'ag --nogroup --nocolor --column'
