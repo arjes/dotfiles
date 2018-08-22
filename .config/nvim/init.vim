@@ -36,6 +36,7 @@ Plug 'scrooloose/nerdcommenter'
 "Plug 'neomake/neomake'
 Plug 'w0rp/ale'
 Plug 'vimwiki/vimwiki'
+Plug 'tpope/vim-abolish'
 
 Plug 'altercation/vim-colors-solarized'
 
