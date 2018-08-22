@@ -68,6 +68,14 @@ ssh-add ~/.ssh/id_rsa &> /dev/null
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/brianmalinconico/workspace/dotfiles/.config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/brianmalinconico/workspace/dotfiles/.config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/brianmalinconico/workspace/dotfiles/.config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/brianmalinconico/workspace/dotfiles/.config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+
 eval "$(rbenv init -)"
 
 export PATH="./node_modules/.bin/tsc:${PATH}:${HOME}/bin"
