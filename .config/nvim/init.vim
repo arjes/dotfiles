@@ -116,8 +116,8 @@ let g:UltiSnipsSnippetsDir='~/.UltiSnips/UltiSnips'
 let g:UltiSnipsExpandTrigger="<C-U>"
 "imap <expr> <Plug>(expand_or_nl) (cm#completed_is_snippet() ? "\<C-U>":"\<CR>")
 "imap <expr> <silent> <cr>  (pumvisible() ? "\<c-y>\<Plug>(cm_inject_snippet)\<Plug>(expand_or_nl)\<Plug>DiscretionaryEnd\<c-r>=AutoPairsReturn()\<cr>" : "\<cr>\<Plug>DiscretionaryEnd\<c-r>=AutoPairsReturn()\<cr>")
-imap <expr> <Plug>(expand_or_nl) (cm#completed_is_snippet() ? "\<C-U>":"\<CR>")
-imap <expr> <silent> <cr>  (pumvisible() ? "\<c-y>\<Plug>(expand_or_nl)\<Plug>DiscretionaryEnd\<c-r>=AutoPairsReturn()\<cr>" : "\<cr>\<Plug>DiscretionaryEnd\<c-r>=AutoPairsReturn()\<cr>")
+"imap <expr> <Plug>(expand_or_nl) (cm#completed_is_snippet() ? "\<C-U>":"\<CR>")
+"imap <expr> <silent> <cr>  (pumvisible() ? "\<c-y>\<Plug>(expand_or_nl)\<Plug>DiscretionaryEnd\<c-r>=AutoPairsReturn()\<cr>" : "\<cr>\<Plug>DiscretionaryEnd\<c-r>=AutoPairsReturn()\<cr>")
 
 " }}}
 
