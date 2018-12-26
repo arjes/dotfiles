@@ -72,7 +72,7 @@ Plug 'airblade/vim-gitgutter'
 
 
 " Typescript -------- {{{
-if !executable('tsc')
+if executable('tsc')
 "Plug 'Quramy/vim-js-pretty-template', { 'for': 'typescript' }
 "Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
 "Plug 'mhartington/nvim-typescript' ", { 'commit': '3b71bb975dfef16a40f92aed6656f7d00ec3be68', 'for': 'typescript' }
