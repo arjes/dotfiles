@@ -76,6 +76,8 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /Users/brianmalinconico/workspace/dotfiles/.config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/brianmalinconico/workspace/dotfiles/.config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 
-eval "$(rbenv init -)"
+if type "rbenv" > /dev/null; then
+  eval "$(rbenv init -)"
+fi
 
 export PATH="./node_modules/.bin/tsc:${PATH}:${HOME}/bin"
