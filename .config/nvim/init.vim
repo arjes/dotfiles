@@ -1,5 +1,10 @@
-let g:python3_host_prog='/usr/local/bin/python3'
-let g:python2_host_prog='/usr/local/Cellar/python@2/2.7.14_3/bin/python2'
+if !executable('python3')
+  let g:python3_host_prog='/usr/local/bin/python3'
+fi
+
+if !executable('python2')
+  let g:python2_host_prog='/usr/local/Cellar/python@2/2.7.14_3/bin/python2'
+fi
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs

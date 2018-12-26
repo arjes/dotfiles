@@ -2,6 +2,7 @@
 
 DEV_CONTEXT_PATH=$(pwd)
 DEV_CONTAINER_NAME=$(md5 -qs $DEV_CONTEXT_PATH)
+CONTAINER_NAME=66c6edef3cc8
 
 if [ ! "$(docker ps -q -f name=$DEV_CONTAINER_NAME)" ]; then
     if [ "$(docker ps -aq -f status=exited -f name=$DEV_CONTAINER_NAME)" ]; then
@@ -9,7 +10,15 @@ if [ ! "$(docker ps -q -f name=$DEV_CONTAINER_NAME)" ]; then
         docker rm $DEV_CONTAINER_NAME
     fi
     # run your container
-    docker run -itd --name $DEV_CONTAINER_NAME 8bd73f5292c1 tmux
+    touch ~/.zsh_history
+    docker run -itd \
+      --volume $DEV_CONTEXT_PATH:/workspace \
+      --volume ~/.ssh:/root/.ssh \
+      --volume ~/.zsh_history:/root/.zsh_history \
+      --volume ~/.clipper.sock:/root/.clipper.sock \
+      --env SSH_AUTH_SOCK=/ssh-agent \
+      --name $DEV_CONTAINER_NAME \
+      $CONTAINER_NAME tmux
 fi
 
-docker attach -name $DEV_CONTAINER_NAME
+docker attach $(docker ps -q -f name=$DEV_CONTAINER_NAME)
