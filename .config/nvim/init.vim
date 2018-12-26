@@ -33,7 +33,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdcommenter'
-"Plug 'neomake/neomake'
 Plug 'w0rp/ale'
 Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-abolish'
@@ -41,7 +40,9 @@ Plug 'tpope/vim-abolish'
 Plug 'altercation/vim-colors-solarized'
 
 Plug 'fatih/vim-go'
-"Plug 'mdempsky/gocode', { 'rtp': 'nvim', 'do': './nvim/symlink.sh' }
+"Plug 'jodosha/vim-godebug' <<-- In editor debug
+Plug 'mdempsky/gocode', { 'rtp': 'nvim', 'do': './nvim/symlink.sh' }
+
 
 " Ruby ------------ {{{
 Plug 'tpope/vim-endwise'
@@ -66,18 +67,16 @@ Plug 'airblade/vim-gitgutter'
 
 
 " Typescript -------- {{{
+if !executable('tsc')
 "Plug 'Quramy/vim-js-pretty-template', { 'for': 'typescript' }
 "Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
 "Plug 'mhartington/nvim-typescript' ", { 'commit': '3b71bb975dfef16a40f92aed6656f7d00ec3be68', 'for': 'typescript' }
 Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
-
+endif
 " }}}
 
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'jiangmiao/auto-pairs'
-"Plug 'nathanaelkane/vim-indent-guides'
-"Plug 'Yggdroot/indentLine'
-"Plug 'floobits/floobits-neovim'
 
 " AutoComplete ----- {{{
 " Previous nvim-completion-manager
@@ -296,6 +295,7 @@ augroup golangCommands
   let g:go_highlight_types = 1
   "let g:go_auto_sameids = 1
   let g:go_fmt_command = "goimports"
+  nnoremap <leader>ee :GoIfErr<cr>
 augroup END
 " }}}
 
