@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
-
+DOCKER_COMPOSE_FILE=docker-compose.dev-env.yml
 DEV_CONTEXT_PATH=$(pwd)
 DEV_CONTAINER_NAME=$(md5 -qs $DEV_CONTEXT_PATH)
-CONTAINER_NAME=a31b1314dcf6
+CONTAINER_NAME=24c546369523
 
-if [ ! "$(docker ps -q -f name=$DEV_CONTAINER_NAME)" ]; then
+function startBasicContainer {
+  if [ ! "$(docker ps -q -f name=$DEV_CONTAINER_NAME)" ]; then
     if [ "$(docker ps -aq -f status=exited -f name=$DEV_CONTAINER_NAME)" ]; then
-        # cleanup
-        docker rm $DEV_CONTAINER_NAME
+      # cleanup
+      docker rm $DEV_CONTAINER_NAME
     fi
     # run your container
     touch ~/.zsh_history
@@ -20,6 +21,56 @@ if [ ! "$(docker ps -q -f name=$DEV_CONTAINER_NAME)" ]; then
       --env SSH_AUTH_SOCK=/ssh-agent \
       --name $DEV_CONTAINER_NAME \
       $CONTAINER_NAME tmux
+  fi
+
+  docker attach $(docker ps -q -f name=$DEV_CONTAINER_NAME)
+}
+
+function attachToDockerCompose {
+  docker-compose -f $DOCKER_COMPOSE_FILE up -d
+  docker attach $(docker-compose -f $DOCKER_COMPOSE_FILE ps -q dev_env)
+}
+
+function createBaseDockerCompose {
+if [ -f $DOCKER_COMPOSE_FILE ];
+then
+    echo "File $DOCKER_COMPOSE_FILE already exists, refusing to create" && exit 1
 fi
 
-docker attach $(docker ps -q -f name=$DEV_CONTAINER_NAME)
+cat > $DOCKER_COMPOSE_FILE  << EOF
+version: '3'
+services:
+  dev_env:
+    image: $CONTAINER_NAME
+    command: tmux
+    stdin_open: true
+    tty: true
+    working_dir: /workspace/$DEV_CONTEXT_PATH
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent
+    volumes:
+      - ~/.ssh:/root/.ssh
+      - /tmp:/tmp
+      - ~/.zsh_history:/root/.zsh_history
+      - $DEV_CONTEXT_PATH:/workspace/$DEV_CONTEXT_PATH
+EOF
+}
+
+function startDevEnv {
+  if [ -f $DOCKER_COMPOSE_FILE ];
+  then
+    attachToDockerCompose;
+  else
+    startBasicContainer
+  fi
+}
+
+case "$1" in
+  init) createBaseDockerCompose
+    ;;
+  "") startDevEnv
+    ;;
+  *) echo "Uncognized command $1. Valid commands are ''|init"
+    ;;
+esac
+
