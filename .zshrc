@@ -13,8 +13,6 @@ ZSH_THEME="agnoster"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias don='pair up strukturedkaos'
-alias tmux-start='sh /usr/share/tmux-start.sh'
 
 alias clean-branches="git checkout master; git fetch; git rebase; git branch --merged | grep -v '\*' | xargs -n 1 git branch -D"
 # Set to this to use case-sensitive completion
@@ -80,4 +78,8 @@ if type "rbenv" > /dev/null; then
   eval "$(rbenv init -)"
 fi
 
-export PATH="./node_modules/.bin/tsc:${PATH}:${HOME}/bin"
+
+# Agnoster theme customization
+prompt_dir() {
+  prompt_segment blue black '%2~'
+}
