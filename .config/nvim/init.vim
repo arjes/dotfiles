@@ -36,8 +36,8 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Snippets ---- {{{
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+"Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets'
 " }}}
 
 " Navigation ------- {{{
@@ -49,6 +49,8 @@ Plug 'simnalamburt/vim-mundo'
 "Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
+Plug 'majutsushi/tagbar'
 " }}}
 
 Plug 'sheerun/vim-polyglot'
@@ -240,11 +242,17 @@ augroup END
 " }}}
 
 nmap <leader>nt :NERDTreeToggle<cr>
+nmap <leader>np :TagbarToggle<cr>
 nmap <leader>fnt :NERDTreeFind<cr>
 
 " FZF Config ----- {{{
 let g:fzf_layout = { 'window': '-tabnew' }
 nnoremap <leader>ff :Files<cr>
+
+" Tag navigation
+nnoremap <leader>gt <C-]>
+nnoremap <leader>ft :Tags<cr>
+nnoremap <leader>fbt :BTags<cr>
 nnoremap <leader>fg :GFiles<cr>
 nnoremap <leader>fd :GFiles?<cr>
 " }}}
@@ -361,13 +369,13 @@ augroup END
 " }}}
 
 " NGRX Helpers ---- {{{
-  autocmd BufReadPost *source.spec.ts :UltiSnipsAddFiletypes source-spec.typescript-spec.typescript.javascript
-  autocmd BufReadPost *effects.spec.ts :UltiSnipsAddFiletypes ngrx-effects-spec.typescript-spec.typescript.javascript
-  autocmd BufReadPost *effects.ts :UltiSnipsAddFiletypes ngrx-effects.typescript-spec.typescript.javascript
-  autocmd BufReadPost *reducer.ts :UltiSnipsAddFiletypes ngrx-reducer.typescript-spec.typescript.javascript
-  autocmd BufReadPost *actions.ts :UltiSnipsAddFiletypes ngrx-actions.typescript-spec.typescript.javascript
-  autocmd BufReadPost */containers/*component.ts :UltiSnipsAddFiletypes ngrx-containers.typescript-spec.typescript.javascript
-  autocmd BufReadPost */component/*component.ts :UltiSnipsAddFiletypes ngrx-containers.typescript-spec.typescript.javascript
+  " autocmd BufReadPost *source.spec.ts :UltiSnipsAddFiletypes source-spec.typescript-spec.typescript.javascript
+  " autocmd BufReadPost *effects.spec.ts :UltiSnipsAddFiletypes ngrx-effects-spec.typescript-spec.typescript.javascript
+  " autocmd BufReadPost *effects.ts :UltiSnipsAddFiletypes ngrx-effects.typescript-spec.typescript.javascript
+  " autocmd BufReadPost *reducer.ts :UltiSnipsAddFiletypes ngrx-reducer.typescript-spec.typescript.javascript
+  " autocmd BufReadPost *actions.ts :UltiSnipsAddFiletypes ngrx-actions.typescript-spec.typescript.javascript
+  " autocmd BufReadPost */containers/*component.ts :UltiSnipsAddFiletypes ngrx-containers.typescript-spec.typescript.javascript
+  " autocmd BufReadPost */component/*component.ts :UltiSnipsAddFiletypes ngrx-containers.typescript-spec.typescript.javascript
 " }}}
 
 
