@@ -83,3 +83,13 @@ fi
 prompt_dir() {
   prompt_segment blue black '%2~'
 }
+
+
+export PATH="${PATH}:${HOME}/bin"
+export PATH="${PATH}:${HOME}/.bin"
+export PATH="./node_modules/.bin/:${PATH}:${HOME}/bin"
+export PATH="${PATH}:${HOME}/Library/Python/3.6/bin/"
+export PATH="${PATH}:${HOME}/Library/Python/2.7/bin/"
+
+export GOPATH="${HOME}/workspace/go/"
+export PATH="${PATH}:${HOME}/workspace/go/bin/"

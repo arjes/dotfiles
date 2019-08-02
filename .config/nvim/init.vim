@@ -453,6 +453,9 @@ set undodir=~/.vim/undo,/tmp
 " Create file under cursor
 map <leader>gf :e %:h<cfile><cr>
 
+" Copy of  current buffer to new tab
+map <leader>fs :tab split<cr>
+
 " Allow local .nvimrc && Turn on security
 set exrc
 set secure " Should be the last line
