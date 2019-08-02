@@ -209,6 +209,7 @@ let g:solarized_termtrans = 1
   set background=dark
 "endif
 colorscheme solarized
+highlight NormalNC ctermfg=59
 " }}}
 
 " Ruby Filetype ---------------------- {{{
@@ -248,6 +249,7 @@ nmap <leader>fnt :NERDTreeFind<cr>
 " FZF Config ----- {{{
 let g:fzf_layout = { 'window': '-tabnew' }
 nnoremap <leader>ff :Files<cr>
+nnoremap <leader>fb :Buffers<cr>
 
 " Tag navigation
 nnoremap <leader>gt <C-]>
@@ -450,6 +452,12 @@ set backupdir=~/.vim/backup,/tmp
 set undodir=~/.vim/undo,/tmp
 " }}}
 
+
+" TOC Updater ------------ {{{
+augroup tocUpdater
+  nnoremap  <leader>toc  :!doctoc %:p<cr>
+augroup END
+" }}}
 " Create file under cursor
 map <leader>gf :e %:h<cfile><cr>
 

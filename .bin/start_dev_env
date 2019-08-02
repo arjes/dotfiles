@@ -2,7 +2,7 @@
 DOCKER_COMPOSE_FILE=${DOCKER_COMPOSE_FILE:-docker-compose.dev-env.yml}
 DEV_CONTEXT_PATH=${DEV_CONTEXT_PATH:-$(pwd)}
 DEV_CONTAINER_NAME=${DEV_CONTAINER_NAME:-$(md5 -qs $DEV_CONTEXT_PATH)}
-CONTAINER_NAME=${CONTAINER_NAME:-arjes/docker_dev_env:ruby2.5-latest}
+CONTAINER_NAME=${CONTAINER_NAME:-arjes/docker_dev_env:ruby2.6-latest}
 
 function startBasicContainer {
   if [ ! "$(docker ps -q -f name=$DEV_CONTAINER_NAME)" ]; then
