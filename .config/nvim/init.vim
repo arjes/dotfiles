@@ -68,8 +68,8 @@ Plug 'mdempsky/gocode', { 'rtp': 'nvim', 'do': './nvim/symlink.sh' }
 
 
 " Ruby ------------ {{{
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-rails'
+"Plug 'tpope/vim-endwise'
+"Plug 'tpope/vim-rails'
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
 "Plug 'ecomba/vim-ruby-refactoring', { 'for': 'ruby' }
 " }}}
@@ -94,7 +94,7 @@ if executable('tsc')
 "Plug 'Quramy/vim-js-pretty-template', { 'for': 'typescript' }
 "Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
 "Plug 'mhartington/nvim-typescript' ", { 'commit': '3b71bb975dfef16a40f92aed6656f7d00ec3be68', 'for': 'typescript' }
-Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
+"Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
 endif
 " }}}
 
@@ -103,13 +103,14 @@ Plug 'jiangmiao/auto-pairs'
 
 " AutoComplete ----- {{{
 " Previous nvim-completion-manager
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-tmux'
-Plug 'filipekiss/ncm2-look.vim'
-Plug 'ncm2/ncm2-go'
+"" "Plug 'ncm2/ncm2'
+"" "Plug 'roxma/nvim-yarp'
+"" "Plug 'ncm2/ncm2-bufword'
+"" "Plug 'ncm2/ncm2-path'
+"" "Plug 'ncm2/ncm2-tmux'
+"" "Plug 'filipekiss/ncm2-look.vim'
+"" "Plug 'ncm2/ncm2-go'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " }}}
 
 
@@ -120,10 +121,52 @@ call plug#end()
 ""Tests
 
 " NCM2 --- {{{
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
+"""autocmd BufEnter * call ncm2#enable_for_buffer()
+"""set completeopt=noinsert,menuone,noselect
 " }}}
 
+" Coc --- {{{
+set updatetime=300
+set shortmess+=c
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+" Use SHFIT-TAB to go back
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+autocmd CursorHold * silent call CocActionAsync('highlight')
+nmap <leader>rn <Plug>(coc-rename)
+
+augroup coc
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" }}}
 " Ack.vim ---- {{{
 let g:ackprg = 'ag --nogroup --nocolor --column'
 " }}}
@@ -145,7 +188,7 @@ let g:UltiSnipsExpandTrigger="<C-U>"
 
 "filetype off
 set relativenumber
-set colorcolumn=80
+set colorcolumn=120
 set ruler
 set nowrap
 set autoindent
@@ -384,7 +427,7 @@ augroup END
 " Deoplete
 "let g:deoplete#enable_at_startup = 1
 "let g:deoplete#auto_complete_delay = 50
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+"inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Neomake
 " augroup neomakecmds
