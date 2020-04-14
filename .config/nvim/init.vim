@@ -55,6 +55,7 @@ Plug 'majutsushi/tagbar'
 
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/vim-easy-align'
+Plug 'ryanoasis/vim-devicons'                           
 Plug 'scrooloose/nerdcommenter'
 Plug 'w0rp/ale'
 Plug 'vimwiki/vimwiki'
@@ -113,6 +114,9 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " }}}
 
+Plug 'hashivim/vim-terraform'
+
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 call plug#end()
 "" }}}
@@ -290,7 +294,34 @@ nmap <leader>np :TagbarToggle<cr>
 nmap <leader>fnt :NERDTreeFind<cr>
 
 " FZF Config ----- {{{
-let g:fzf_layout = { 'window': '-tabnew' }
+" floating fzf window with borders
+function! CreateCenteredFloatingWindow()
+    let width = min([&columns - 4, max([80, &columns - 20])])
+    let height = min([&lines - 4, max([20, &lines - 10])])
+    let top = ((&lines - height) / 2) - 1
+    let left = (&columns - width) / 2
+    let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
+
+    let top = "╭" . repeat("─", width - 2) . "╮"
+    let mid = "│" . repeat(" ", width - 2) . "│"
+    let bot = "╰" . repeat("─", width - 2) . "╯"
+    let lines = [top] + repeat([mid], height - 2) + [bot]
+    let s:buf = nvim_create_buf(v:false, v:true)
+    call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
+    call nvim_open_win(s:buf, v:true, opts)
+    set winhl=Normal:Floating
+    let opts.row += 1
+    let opts.height -= 2
+    let opts.col += 2
+    let opts.width -= 4
+    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+    au BufWipeout <buffer> exe 'bw '.s:buf
+endfunction
+
+"let g:fzf_layout = { 'window': '-tabnew' }
+let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
+let g:fzf_files_options = '--preview "bat --style=numbers --color=always {} | head -500"'
+
 nnoremap <leader>ff :Files<cr>
 nnoremap <leader>fb :Buffers<cr>
 
@@ -341,6 +372,10 @@ let g:ale_sign_warning = '⚠'
 
 augroup aleCommands
 autocmd!
+let g:ale_linters = {
+\   'ruby': ['rubocop'],
+\}
+
 let g:ale_fixers = {
 \   'ruby': ['rubocop'],
 \   'typescript': ['tslint'],
@@ -379,7 +414,7 @@ augroup typescriptCommands
 	let g:typescript_compiler_binary = 'tsc'
 	let g:typescript_compiler_options = '--noEmit'
 	"autocmd FileType typescript JsPreTmpl html
-	autocmd FileType typescript syn clear foldBraces
+	"autocmd FileType typescript syn clear foldBraces
   autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
   let g:tsuquyomi_disable_quickfix = 1
   let g:tsuquyomi_shortest_import_path = 1
@@ -452,6 +487,7 @@ inoremap <esc> <nop>
 augroup filetype_terraform
     autocmd!
     autocmd FileType terraform setlocal foldmethod=marker
+    let g:terraform_fmt_on_save=1
 augroup END
 " }}}
     
@@ -506,6 +542,10 @@ map <leader>gf :e %:h<cfile><cr>
 
 " Copy of  current buffer to new tab
 map <leader>fs :tab split<cr>
+
+if has('nvim-0.3.2') || has("patch-8.1.0360")
+    set diffopt=filler,internal,algorithm:histogram,indent-heuristic
+endif
 
 " Allow local .nvimrc && Turn on security
 set exrc
