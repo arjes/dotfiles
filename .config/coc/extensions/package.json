@@ -1,14 +1,14 @@
 {
   "dependencies": {
-    "coc-tsserver": ">=1.4.13",
     "coc-angular": ">=0.901.0",
-    "coc-tag": ">=1.2.4",
-    "coc-syntax": ">=1.2.4",
-    "coc-gocode": ">=1.2.4",
     "coc-css": ">=1.2.2",
+    "coc-gocode": ">=1.2.4",
     "coc-html": ">=1.2.4",
     "coc-json": ">=1.2.5",
-    "coc-yaml": ">=1.0.4",
     "coc-solargraph": ">=1.1.6"
+    "coc-syntax": ">=1.2.4",
+    "coc-tag": ">=1.2.4",
+    "coc-tsserver": ">=1.4.13",
+    "coc-yaml": ">=1.0.4"
   }
 }

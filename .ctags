@@ -6,6 +6,7 @@
 --exclude=vendor/assets
 --exclude=.bundle
 --exclude=coverage
+--exclude=node_modules
 --langdef=typescript
 --langmap=typescript:.ts
 --regex-typescript=/^[ \t]*(export[ \t]+(abstract[ \t]+)?)?class[ \t]+([a-zA-Z0-9_$]+)/\3/c,classes/
