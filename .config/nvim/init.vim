@@ -362,25 +362,25 @@ nnoremap  <leader>yy  "+yy
 " Ale Config ------- {{{
 "
 " Error and warning signs.
-let g:ale_sign_error = '⤫'
-let g:ale_sign_warning = '⚠'
-
-augroup aleCommands
-autocmd!
-let g:ale_linters = {
-\   'ruby': ['rubocop'],
-\}
-
-let g:ale_fixers = {
-\   'ruby': ['rubocop'],
-\   'typescript': ['tslint'],
-\}
-
-
-nmap <silent> <leader>af :ALEFix<cr>
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-augroup END
+"let g:ale_sign_error = '⤫'
+"let g:ale_sign_warning = '⚠'
+"
+"augroup aleCommands
+"autocmd!
+"let g:ale_linters = {
+"\   'ruby': ['rubocop'],
+"\}
+"
+"let g:ale_fixers = {
+"\   'ruby': ['rubocop'],
+"\   'typescript': ['tslint'],
+"\}
+"
+"
+"nmap <silent> <leader>af :ALEFix<cr>
+"nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+"nmap <silent> <C-j> <Plug>(ale_next_wrap)
+"augroup END
 " }}}
 
 " Golang ------------------- {{{
