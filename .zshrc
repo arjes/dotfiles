@@ -99,3 +99,4 @@ export PATH="${PATH}:${HOME}/Library/Python/2.7/bin/"
 
 export GOPATH="${HOME}/workspace/go/"
 export PATH="${PATH}:${HOME}/workspace/go/bin/"
+export PATH=$PATH:/Users/brianmalinconico/.nexustools
