@@ -1,5 +1,5 @@
 if !executable('python3')
-  let g:python3_host_prog='/usr/local/bin/python3'
+  let g:python3_host_prog='/usr/local/Cellar/python/3.7.7/bin/python3'
 endif
 
 if !executable('python2')
@@ -58,14 +58,14 @@ Plug 'junegunn/vim-easy-align'
 Plug 'ryanoasis/vim-devicons'                           
 Plug 'scrooloose/nerdcommenter'
 Plug 'w0rp/ale'
-Plug 'vimwiki/vimwiki'
+"Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-abolish'
 
 Plug 'altercation/vim-colors-solarized'
 
-Plug 'fatih/vim-go'
+"Plug 'fatih/vim-go'
 "Plug 'jodosha/vim-godebug' <<-- In editor debug
-Plug 'mdempsky/gocode', { 'rtp': 'nvim', 'do': './nvim/symlink.sh' }
+"Plug 'mdempsky/gocode', { 'rtp': 'nvim', 'do': './nvim/symlink.sh' }
 
 
 " Ruby ------------ {{{
@@ -124,11 +124,6 @@ call plug#end()
 
 ""Tests
 
-" NCM2 --- {{{
-"""autocmd BufEnter * call ncm2#enable_for_buffer()
-"""set completeopt=noinsert,menuone,noselect
-" }}}
-
 " Coc --- {{{
 set updatetime=300
 set shortmess+=c
@@ -138,6 +133,7 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 " Use SHFIT-TAB to go back
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 function! s:check_back_space() abort
 	let col = col('.') - 1
@@ -145,7 +141,6 @@ function! s:check_back_space() abort
 endfunction
 
 inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -367,25 +362,25 @@ nnoremap  <leader>yy  "+yy
 " Ale Config ------- {{{
 "
 " Error and warning signs.
-let g:ale_sign_error = '⤫'
-let g:ale_sign_warning = '⚠'
-
-augroup aleCommands
-autocmd!
-let g:ale_linters = {
-\   'ruby': ['rubocop'],
-\}
-
-let g:ale_fixers = {
-\   'ruby': ['rubocop'],
-\   'typescript': ['tslint'],
-\}
-
-
-nmap <silent> <leader>af :ALEFix<cr>
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-augroup END
+"let g:ale_sign_error = '⤫'
+"let g:ale_sign_warning = '⚠'
+"
+"augroup aleCommands
+"autocmd!
+"let g:ale_linters = {
+"\   'ruby': ['rubocop'],
+"\}
+"
+"let g:ale_fixers = {
+"\   'ruby': ['rubocop'],
+"\   'typescript': ['tslint'],
+"\}
+"
+"
+"nmap <silent> <leader>af :ALEFix<cr>
+"nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+"nmap <silent> <C-j> <Plug>(ale_next_wrap)
+"augroup END
 " }}}
 
 " Golang ------------------- {{{
@@ -415,65 +410,16 @@ augroup typescriptCommands
 	let g:typescript_compiler_options = '--noEmit'
 	"autocmd FileType typescript JsPreTmpl html
 	"autocmd FileType typescript syn clear foldBraces
-  autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
-  let g:tsuquyomi_disable_quickfix = 1
-  let g:tsuquyomi_shortest_import_path = 1
-  let g:tsuquyomi_single_quote_import = 1
-  let g:tsuquyomi_completion_detail = 1
-  let g:nvim_typescript#type_info_on_hold = 1
 
   let g:coverage_json_report_path = 'coverage/coverage-final.json'
-
-  autocmd FileType typescript nmap <buffer> lr :TSRename<CR>
-  autocmd FileType typescript nmap <buffer> lf :TSRefs<CR>
-  autocmd FileType typescript nmap <buffer> ld :TSTypeDef<CR>
-  autocmd FileType typescript nmap <buffer> lds :TSDefPreview<CR>
-  autocmd FileType typescript nmap <buffer> ti :TSImport<CR>
 
   autocmd FileType typescript syn region typescriptStringD start=+"+ skip=+\\\\\|\\"+ end=+"\|$+  contains=@Spell,typescriptSpecial,@htmlPreproc extend
   autocmd FileType typescript syn region typescriptStringS start=+'+ skip=+\\\\\|\\'+ end=+'\|$+  contains=@Spell,typescriptSpecial,@htmlPreproc extend
   autocmd FileType typescript syn region typescriptStringB start=+`+ skip=+\\\\\|\\`+ end=+`+  contains=@Spell,typescriptInterpolation,typescriptSpecial,@htmlPreproc extend
 
-
-  "autocmd FileType typescript nmap <buffer> <leader>lr <Plug>(TsuquyomiRenameSymbol)
-  "autocmd FileType typescript nmap <buffer> <leader>lR <Plug>(TsuquyomiRenameSymbolC)
-  "autocmd FileType typescript nmap <buffer> <leader>tu <Plug>(TsuquyomiReferences)
-  "autocmd FileType typescript nmap <buffer> <leader>ld :<C-u>echo tsuquyomi#hint()<CR>
-  "autocmd FileType typescript nmap <buffer> <leader>ti :TsuImport<CR>
-  "autocmd FileType typescript autocmd CursorHold <buffer> echo tsuquyomi#hint()
-  "autocmd FileType typescript setlocal updatetime=1000
-
-  "autocmd BufReadPost *.spec.ts set ft=typescript.spec
-
 augroup END
 " }}}
 
-" NGRX Helpers ---- {{{
-  " autocmd BufReadPost *source.spec.ts :UltiSnipsAddFiletypes source-spec.typescript-spec.typescript.javascript
-  " autocmd BufReadPost *effects.spec.ts :UltiSnipsAddFiletypes ngrx-effects-spec.typescript-spec.typescript.javascript
-  " autocmd BufReadPost *effects.ts :UltiSnipsAddFiletypes ngrx-effects.typescript-spec.typescript.javascript
-  " autocmd BufReadPost *reducer.ts :UltiSnipsAddFiletypes ngrx-reducer.typescript-spec.typescript.javascript
-  " autocmd BufReadPost *actions.ts :UltiSnipsAddFiletypes ngrx-actions.typescript-spec.typescript.javascript
-  " autocmd BufReadPost */containers/*component.ts :UltiSnipsAddFiletypes ngrx-containers.typescript-spec.typescript.javascript
-  " autocmd BufReadPost */component/*component.ts :UltiSnipsAddFiletypes ngrx-containers.typescript-spec.typescript.javascript
-" }}}
-
-
-" Deoplete
-"let g:deoplete#enable_at_startup = 1
-"let g:deoplete#auto_complete_delay = 50
-"inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-" Neomake
-" augroup neomakecmds
-"   autocmd!
-"   autocmd BufWritePost * Neomake
-" augroup END
-
-
-"Indent Guides
-"nnoremap <leader>ig :IndentLinesToggle<CR>
-" GUndo
 nnoremap <leader>u :MundoToggle<CR>
 
 " vimrc helpers---------------------- {{{
@@ -490,7 +436,7 @@ augroup filetype_terraform
     let g:terraform_fmt_on_save=1
 augroup END
 " }}}
-    
+
 " Vimscript file settings ---------------------- {{{
 augroup filetype_vim
     autocmd!
@@ -517,11 +463,6 @@ augroup autoDebugger
   autocmd FileType typescript nnoremap <leader>pd yiwOconsole.log(<esc>pA)
 "  autocmd FileType typescript inoremap <leader>pd <esc>yiwOconsole.log(<esc>pA)
 augroup END
-" }}}
-
-" Vim Wiki ---------------------- {{{
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
-autocmd BufEnter,BufRead */vimwiki/* setlocal spell spelllang=en_us
 " }}}
 
 " Directory Structure ---------------------- {{{

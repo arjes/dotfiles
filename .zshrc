@@ -70,13 +70,6 @@ ssh-add ~/.ssh/id_rsa &> /dev/null
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/brianmalinconico/workspace/dotfiles/.config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/brianmalinconico/workspace/dotfiles/.config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/brianmalinconico/workspace/dotfiles/.config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/brianmalinconico/workspace/dotfiles/.config/yarn/global/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
-
 if type "rbenv" > /dev/null; then
   eval "$(rbenv init -)"
 fi
@@ -100,3 +93,9 @@ export PATH="${PATH}:${HOME}/Library/Python/2.7/bin/"
 export GOPATH="${HOME}/workspace/go/"
 export PATH="${PATH}:${HOME}/workspace/go/bin/"
 export PATH=$PATH:/Users/brianmalinconico/.nexustools
+
+###-tns-completion-start-###
+if [ -f /Users/brianmalinconico/.tnsrc ]; then 
+    source /Users/brianmalinconico/.tnsrc 
+fi
+###-tns-completion-end-###
