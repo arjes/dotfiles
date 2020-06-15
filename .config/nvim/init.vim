@@ -58,7 +58,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'ryanoasis/vim-devicons'                           
 Plug 'scrooloose/nerdcommenter'
 Plug 'w0rp/ale'
-"Plug 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-abolish'
 
 Plug 'altercation/vim-colors-solarized'
@@ -487,6 +487,9 @@ map <leader>fs :tab split<cr>
 if has('nvim-0.3.2') || has("patch-8.1.0360")
     set diffopt=filler,internal,algorithm:histogram,indent-heuristic
 endif
+
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
 
 " Allow local .nvimrc && Turn on security
 set exrc
