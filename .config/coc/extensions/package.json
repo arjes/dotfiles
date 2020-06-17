@@ -7,7 +7,7 @@
     "coc-html": ">=1.2.4",
     "coc-solargraph": ">=1.1.6",
     "coc-syntax": ">=1.2.4",
-    "coc-tag": ">=1.2.4",
+    "coc-tag": ">=1.2.5",
     "coc-tslint-plugin": ">=1.1.1",
     "coc-tsserver": ">=1.4.15",
     "coc-yaml": ">=1.0.4"
