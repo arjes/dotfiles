@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 DEFAULT_USER=$USER
@@ -8,7 +15,8 @@ DEFAULT_USER=$USER
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster"
+#ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 #ZSH_THEME='robbyrussell'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -80,9 +88,9 @@ export NVM_DIR="$HOME/.nvm"
 
 
 # Agnoster theme customization
-prompt_dir() {
-  prompt_segment blue black '%2~'
-}
+# prompt_dir() {
+#   prompt_segment blue black '%2~'
+# }
 
 export PATH="${PATH}:${HOME}/bin"
 export PATH="${PATH}:${HOME}/.bin"
@@ -99,3 +107,6 @@ if [ -f /Users/brianmalinconico/.tnsrc ]; then
     source /Users/brianmalinconico/.tnsrc 
 fi
 ###-tns-completion-end-###
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
