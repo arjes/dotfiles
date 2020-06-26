@@ -55,7 +55,6 @@ Plug 'majutsushi/tagbar'
 
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/vim-easy-align'
-Plug 'ryanoasis/vim-devicons'                           
 Plug 'scrooloose/nerdcommenter'
 Plug 'w0rp/ale'
 Plug 'vimwiki/vimwiki'
