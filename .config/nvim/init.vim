@@ -62,7 +62,7 @@ Plug 'tpope/vim-abolish'
 
 Plug 'altercation/vim-colors-solarized'
 
-"Plug 'fatih/vim-go'
+Plug 'fatih/vim-go'
 "Plug 'jodosha/vim-godebug' <<-- In editor debug
 "Plug 'mdempsky/gocode', { 'rtp': 'nvim', 'do': './nvim/symlink.sh' }
 
@@ -399,6 +399,7 @@ augroup golangCommands
   "let g:go_auto_sameids = 1
   let g:go_fmt_command = "goimports"
   nnoremap <leader>ee :GoIfErr<cr>
+  autocmd BufWritePre *.go :call CocAction('organizeImport')
 augroup END
 " }}}
 
@@ -487,8 +488,12 @@ if has('nvim-0.3.2') || has("patch-8.1.0360")
     set diffopt=filler,internal,algorithm:histogram,indent-heuristic
 endif
 
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{'path': '~/.vimwiki/' }]
+
+let g:vimwiki_key_mappings =
+  \ {
+  \ 'table_mappings': 0,
+  \ }
 
 " Allow local .nvimrc && Turn on security
 set exrc

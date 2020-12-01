@@ -14,6 +14,7 @@
   default = current
 [core]
 	editor = nvim
+	attributesfile = /Users/brianmalinconico/.gitattributes
 [credential]
 	helper = osxkeychain
 [merge]
@@ -27,3 +28,5 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+[url "git@github.com:"]
+	insteadOf = https://github.com/
