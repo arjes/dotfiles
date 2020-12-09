@@ -92,6 +92,10 @@ export NVM_DIR="$HOME/.nvm"
 #   prompt_segment blue black '%2~'
 # }
 
+aws-prod-mfa() {
+  eval $(AWS_PROFILE=prod $HOME/.bin/aws-mfa $1)
+}
+
 export PATH="${PATH}:${HOME}/bin"
 export PATH="${PATH}:${HOME}/.bin"
 export PATH="./node_modules/.bin/:${PATH}:${HOME}/bin"
@@ -109,4 +113,5 @@ fi
 ###-tns-completion-end-###
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+#
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

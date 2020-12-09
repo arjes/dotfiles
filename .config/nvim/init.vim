@@ -16,22 +16,6 @@ if !executable('ag') &&  executable('brew')
   silent !brew install the_silver_searcher
 endif
 
-if $IN_DOCKER_DEV_ENV
-  let g:clipboard = {
-        \   'name': 'myClipboard',
-        \   'copy': {
-        \      '+': 'nc -N host.docker.internal 8377',
-        \      '*': 'nc -N host.docker.internal 8377',
-        \    },
-        \   'paste': {
-        \      '+': 'tmux save-buffer -',
-        \      '*': 'tmux save-buffer -',
-        \   },
-        \   'cache_enabled': 1,
-        \ }
-endif 
-
-
 " Plugin Installation ---------------------- {{{
 call plug#begin('~/.vim/plugged')
 
@@ -120,6 +104,8 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 call plug#end()
 "" }}}
 
+" Clear the VimWiki <tab> mapping
+inoremap <tab> <nop>
 
 ""Tests
 
