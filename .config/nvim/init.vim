@@ -148,6 +148,9 @@ augroup coc
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+  " Formatters
+  autocmd FileType typescript,typescriptreact nmap <buffer> <leader>af :CocCommand eslint.executeAutofix<cr>
 augroup end
 
 " }}}
