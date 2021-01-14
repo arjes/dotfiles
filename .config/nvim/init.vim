@@ -19,11 +19,6 @@ endif
 " Plugin Installation ---------------------- {{{
 call plug#begin('~/.vim/plugged')
 
-" Snippets ---- {{{
-"Plug 'SirVer/ultisnips'
-"Plug 'honza/vim-snippets'
-" }}}
-
 " Navigation ------- {{{
 Plug 'scrooloose/nerdtree', { 'on':  [ 'NERDTreeFind', 'NERDTreeToggle' ] }
 Plug 'mileszs/ack.vim'
@@ -350,20 +345,19 @@ nnoremap  <leader>yy  "+yy
 " Ale Config ------- {{{
 "
 " Error and warning signs.
-"let g:ale_sign_error = '⤫'
-"let g:ale_sign_warning = '⚠'
-"
-"augroup aleCommands
-"autocmd!
-"let g:ale_linters = {
-"\   'ruby': ['rubocop'],
-"\}
-"
-"let g:ale_fixers = {
-"\   'ruby': ['rubocop'],
-"\   'typescript': ['tslint'],
-"\}
-"
+let g:ale_sign_error = '⤫'
+let g:ale_sign_warning = '⚠'
+
+augroup aleCommands
+autocmd!
+let g:ale_linters = {
+\   'ruby': ['rubocop'],
+\}
+
+let g:ale_fixers = {
+\   'ruby': ['rubocop'],
+\}
+
 "
 "nmap <silent> <leader>af :ALEFix<cr>
 "nmap <silent> <C-k> <Plug>(ale_previous_wrap)
@@ -388,7 +382,7 @@ augroup golangCommands
   "let g:go_auto_sameids = 1
   let g:go_fmt_command = "goimports"
   nnoremap <leader>ee :GoIfErr<cr>
-  autocmd BufWritePre *.go :call CocAction('organizeImport')
+  autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 augroup END
 " }}}
 
