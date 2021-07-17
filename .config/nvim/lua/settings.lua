@@ -1,0 +1,16 @@
+
+vim.opt.relativenumber=true
+vim.opt.colorcolumn="120"
+vim.opt.ruler=true
+vim.opt.wrap=false
+vim.opt.autoindent=true
+vim.opt.hlsearch=true
+vim.opt.incsearch=true
+vim.opt.tabstop=2
+vim.opt.shiftwidth=2
+vim.opt.softtabstop=2
+vim.opt.backspace="indent,eol,start"
+vim.opt.expandtab=true
+vim.opt.spell=false
+vim.opt.spelllang="en_us"
+vim.opt.timeoutlen=500

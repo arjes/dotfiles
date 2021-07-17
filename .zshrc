@@ -106,6 +106,9 @@ export GOPATH="${HOME}/workspace/go/"
 export PATH="${PATH}:${HOME}/workspace/go/bin/"
 export PATH=$PATH:/Users/brianmalinconico/.nexustools
 
+export PATH=$PATH:~/Library/Android/sdk/platform-tools/
+export PATH=$PATH:~/Library/Android/sdk/tools/
+
 ###-tns-completion-start-###
 if [ -f /Users/brianmalinconico/.tnsrc ]; then 
     source /Users/brianmalinconico/.tnsrc 
@@ -115,3 +118,7 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+if [[ "$TERM" == "xterm-kitty" ]]; then
+  alias ssh="kitty +kitten ssh"
+fi
