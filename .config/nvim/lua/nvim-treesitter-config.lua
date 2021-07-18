@@ -1,7 +1,11 @@
 require'nvim-treesitter.configs'.setup {
   ensure_installed = {
     "ruby";
-  }, --,javascript,typescript,go,gomod", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    "javascript";
+    "typescript";
+    "go";
+    "gomod";
+  },
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,

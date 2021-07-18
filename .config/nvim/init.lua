@@ -8,7 +8,7 @@ vim.opt.undodir="~/.vim/undo,/tmp"
 -- Plugins {{{
 require "paq" {
     "savq/paq-nvim";
-    "kyazdani42/nvim-web-devicons";
+    -- "kyazdani42/nvim-web-devicons";
     "kyazdani42/nvim-tree.lua";
     "hoob3rt/lualine.nvim";
     "projekt0n/github-nvim-theme";
@@ -49,6 +49,7 @@ require('nvim-treesitter-config')
 require('nvim-lspconfig-config')
 require('completion-nvim-config')
 require('gitsigns-config')
+require('nvim-tree-config')
 
 require('github-theme').setup()
 
