@@ -17,8 +17,25 @@ require "paq" {
     "nvim-lua/popup.nvim";
     "nvim-lua/plenary.nvim";
     "nvim-telescope/telescope.nvim";
+
+    "justinmk/vim-sneak";
+    {
+      "nvim-treesitter/nvim-treesitter",
+      run=function() vim.cmd ':TSUpdate' end
+    };
+
+    "neovim/nvim-lspconfig";
+
+    "nvim-lua/completion-nvim";
+    "steelsojka/completion-buffers";
+    "nvim-treesitter/completion-treesitter";
+
+    "tpope/vim-surround";
+    "simnalamburt/vim-mundo";
+
+    "janko-m/vim-test";
+    "lewis6991/gitsigns.nvim";
 }
---
 
 -- General Config For All Buffers
 require('settings')
@@ -27,6 +44,10 @@ require('settings')
 require('keybindings')
 
 --Plugins
+require('nvim-treesitter-config')
+require('nvim-lspconfig-config')
+require('completion-nvim-config')
+require('gitsigns-config')
 
 require('github-theme').setup()
 

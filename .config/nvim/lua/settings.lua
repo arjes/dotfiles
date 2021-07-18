@@ -1,5 +1,6 @@
 
 vim.opt.relativenumber=true
+vim.opt.number=true
 vim.opt.colorcolumn="120"
 vim.opt.ruler=true
 vim.opt.wrap=false
@@ -14,3 +15,5 @@ vim.opt.expandtab=true
 vim.opt.spell=false
 vim.opt.spelllang="en_us"
 vim.opt.timeoutlen=500
+vim.opt.undofile=true
+vim.opt.undodir="~/.vim/undo,/tmp"

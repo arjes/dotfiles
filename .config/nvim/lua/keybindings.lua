@@ -6,6 +6,8 @@ map('n', '<leader>evc', ':edit $MYVIMRC<CR>', {noremap = true})
 map('n', '<leader>rvc', ':luafile $MYVIMRC<CR>', {noremap = true})
 map('i', '<esc>', '<nop>', {noremap = true})
 
+map('n', '<leader>u', ':MundoToggle<cr>', {noremap = true})
+
 -- File Tree Navigation
 map('n', '<leader>nt', ':NvimTreeToggle<cr>', {})
 map('n', '<leader>fnt', ':NvimTreeFindFile<cr>', {})
