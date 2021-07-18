@@ -18,7 +18,7 @@ require "paq" {
     "nvim-lua/plenary.nvim";
     "nvim-telescope/telescope.nvim";
 
-    "justinmk/vim-sneak";
+    -- "justinmk/vim-sneak";
     {
       "nvim-treesitter/nvim-treesitter",
       run=function() vim.cmd ':TSUpdate' end
@@ -35,6 +35,7 @@ require "paq" {
 
     "janko-m/vim-test";
     "lewis6991/gitsigns.nvim";
+    "unblevable/quick-scope";
 }
 
 -- General Config For All Buffers
