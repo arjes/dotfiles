@@ -15,8 +15,14 @@ require "paq" {
 
     -- Telescope Deps
     "nvim-lua/popup.nvim";
-    "nvim-lua/plenary.nvim";
-    "nvim-telescope/telescope.nvim";
+    {
+      "nvim-lua/plenary.nvim",
+      branch="async_jobs_v2"
+    };
+    { 
+      "nvim-telescope/telescope.nvim",
+      branch="async_v2"
+    };
 
     -- "justinmk/vim-sneak";
     {
@@ -45,6 +51,7 @@ require('settings')
 require('keybindings')
 
 --Plugins
+require('telescope-config')
 require('nvim-treesitter-config')
 require('nvim-lspconfig-config')
 require('completion-nvim-config')
