@@ -13,6 +13,7 @@ map('n', '<leader>nt', ':NvimTreeToggle<cr>', {})
 map('n', '<leader>fnt', ':NvimTreeFindFile<cr>', {})
 map('n', '<leader>ff', ':Telescope find_files<cr>', {})
 map('n', '<leader>fg', ':Telescope live_grep<cr>', {})
+map('n', '<leader>fw', ':Telescope grep_string<cr>', {})
 
 -- Copy to clipboard
 map('v', '<leader>y', '"+y', {noremap = true})
