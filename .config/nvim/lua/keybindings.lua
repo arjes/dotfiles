@@ -20,3 +20,12 @@ map('n', '<leader>Y', '"+yg_', {noremap = true})
 map('n', '<leader>y', '"+y', {noremap = true})
 map('n', '<leader>yy', '"+yy', {noremap = true})
 
+map('n', '<leader>r', ':set opfunc=ChangePaste<CR>g@', {silent=true})
+
+vim.cmd [[
+function! ChangePaste(type, ...)
+    silent exe "normal! `[v`]\"_c"
+    silent exe "normal! \"0p"
+endfunction
+]]
+

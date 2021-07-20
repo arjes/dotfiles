@@ -5,6 +5,7 @@ require'nvim-treesitter.configs'.setup {
     "typescript";
     "go";
     "gomod";
+    "hcl";
   },
   highlight = {
     enable = true,
