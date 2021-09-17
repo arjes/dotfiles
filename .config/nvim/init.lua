@@ -1,4 +1,4 @@
------ Directories {{{
+ ----- Directories {{{
 vim.opt.directory="~/.vim/swap,/tmp"
 vim.opt.undofile=true
 vim.opt.backupdir="~/.vim/backup,/tmp"
@@ -9,20 +9,15 @@ vim.opt.undodir="~/.vim/undo,/tmp"
 require "paq" {
     "savq/paq-nvim";
     -- "kyazdani42/nvim-web-devicons";
-    "kyazdani42/nvim-tree.lua";
+    -- "kyazdani42/nvim-tree.lua";
+    "scrooloose/nerdtree";
     "hoob3rt/lualine.nvim";
     "projekt0n/github-nvim-theme";
 
     -- Telescope Deps
-    "nvim-lua/popup.nvim";
-    {
-      "nvim-lua/plenary.nvim",
-      branch="async_jobs_v2"
-    };
-    { 
-      "nvim-telescope/telescope.nvim",
-      branch="async_v2"
-    };
+    -- "nvim-lua/popup.nvim";
+    { "nvim-lua/plenary.nvim" };
+    { "nvim-telescope/telescope.nvim" };
 
     -- "justinmk/vim-sneak";
     {
@@ -32,9 +27,12 @@ require "paq" {
 
     "neovim/nvim-lspconfig";
 
-    "nvim-lua/completion-nvim";
-    "steelsojka/completion-buffers";
-    "nvim-treesitter/completion-treesitter";
+    -- Fast but the author keeps pushing bugs :/
+    --{ "ms-jpq/coq_nvim", branch="coq" };
+    "hrsh7th/nvim-cmp";
+    "hrsh7th/cmp-buffer";
+    "hrsh7th/cmp-nvim-lsp";
+    "hrsh7th/cmp-path";
 
     "tpope/vim-surround";
     "simnalamburt/vim-mundo";
@@ -42,6 +40,8 @@ require "paq" {
     "janko-m/vim-test";
     "lewis6991/gitsigns.nvim";
     "unblevable/quick-scope";
+    "junegunn/vim-easy-align";
+    "tpope/vim-fugitive";
 }
 
 -- General Config For All Buffers
@@ -54,15 +54,14 @@ require('keybindings')
 require('telescope-config')
 require('nvim-treesitter-config')
 require('nvim-lspconfig-config')
-require('completion-nvim-config')
+-- require('completion-nvim-config')
+--require('coq_settings')
+require('nvim-cmp-settings')
 require('gitsigns-config')
-require('nvim-tree-config')
+-- require('nvim-tree-config')
 
 require('github-theme').setup()
 
--- Reload is required to fix a bug in lualine when the 
--- config is reloaded. https://github.com/hoob3rt/lualine.nvim/issues/276
-require("plenary.reload").reload_module("lualine", true)
 require('lualine').setup {
   options = {
     theme = 'github',

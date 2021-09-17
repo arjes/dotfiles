@@ -267,7 +267,7 @@
 // augroup END
 // " }}}
 // 
-// nmap <leader>nt :NERDTreeToggle<cr>
+// nmap <leader>nt :NERDTreeToggld<cr>
 // nmap <leader>np :TagbarToggle<cr>
 // nmap <leader>fnt :NERDTreeFind<cr>
 // 
