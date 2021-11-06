@@ -10,6 +10,16 @@ require'lspconfig'.gopls.setup{
   capabilities = capabilities
 }
 
+require'lspconfig'.eslint.setup{
+  capabilities = capabilities
+}
+
+require'lspconfig'.tsserver.setup{
+  capabilities = capabilities
+}
+
+
+
 vim.cmd [[
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -21,7 +31,7 @@ set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 
 " autocmd BufEnter * lua require'completion'.on_attach()
-autocmd CursorHold * silent lua vim.lsp.buf.hover()
+autocmd CursorHold *.ts,*.js,*.jsx silent lua vim.lsp.buf.hover()
 ]]
 
 -- map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<cr>', {noremap = true})
