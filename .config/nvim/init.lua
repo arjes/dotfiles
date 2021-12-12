@@ -47,6 +47,8 @@ require "paq" {
 -- General Config For All Buffers
 require('settings')
 
+require('spelling')
+
 -- Global Key Bindings
 require('keybindings')
 
