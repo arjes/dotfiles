@@ -122,3 +122,5 @@ fi
 if [[ "$TERM" == "xterm-kitty" ]]; then
   alias ssh="kitty +kitten ssh"
 fi
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
