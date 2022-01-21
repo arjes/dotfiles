@@ -33,6 +33,7 @@ require "paq" {
     "hrsh7th/cmp-buffer";
     "hrsh7th/cmp-nvim-lsp";
     "hrsh7th/cmp-path";
+    "hrsh7th/vim-vsnip";
 
     "tpope/vim-surround";
     "simnalamburt/vim-mundo";
@@ -42,6 +43,8 @@ require "paq" {
     "unblevable/quick-scope";
     "junegunn/vim-easy-align";
     "tpope/vim-fugitive";
+
+    "fatih/vim-go";
 }
 
 -- General Config For All Buffers
