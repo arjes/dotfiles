@@ -65,7 +65,6 @@ export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 alias sforeman="foreman start | tee -a log/foreman.log"
 
-
 if type "nvim" > /dev/null; then
   alias vim="nvim"
   alias vi="nvim"
@@ -83,7 +82,7 @@ if type "rbenv" > /dev/null; then
 fi
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 

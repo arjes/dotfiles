@@ -1,20 +1,24 @@
 local map = vim.api.nvim_set_keymap
+local lsp = require "lspconfig"
+local coq = require "coq"
+
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+-- capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = coq.lsp_ensure_capabilities(capabilities)
 
-require'lspconfig'.solargraph.setup{
+lsp.solargraph.setup{
   capabilities = capabilities
 }
-require'lspconfig'.gopls.setup{
-  capabilities = capabilities
-}
-
-require'lspconfig'.eslint.setup{
+lsp.gopls.setup{
   capabilities = capabilities
 }
 
-require'lspconfig'.tsserver.setup{
+lsp.eslint.setup{
+  capabilities = capabilities
+}
+
+lsp.tsserver.setup{
   capabilities = capabilities
 }
 

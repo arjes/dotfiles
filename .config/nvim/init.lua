@@ -18,6 +18,10 @@ require "paq" {
     -- "nvim-lua/popup.nvim";
     { "nvim-lua/plenary.nvim" };
     { "nvim-telescope/telescope.nvim" };
+    {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      run='make'
+    };
 
     -- "justinmk/vim-sneak";
     {
@@ -28,12 +32,12 @@ require "paq" {
     "neovim/nvim-lspconfig";
 
     -- Fast but the author keeps pushing bugs :/
-    --{ "ms-jpq/coq_nvim", branch="coq" };
-    "hrsh7th/nvim-cmp";
-    "hrsh7th/cmp-buffer";
-    "hrsh7th/cmp-nvim-lsp";
-    "hrsh7th/cmp-path";
-    "hrsh7th/vim-vsnip";
+    { "ms-jpq/coq_nvim", branch="coq" };
+ --   "hrsh7th/nvim-cmp";
+ --   "hrsh7th/cmp-buffer";
+ --   "hrsh7th/cmp-nvim-lsp";
+ --   "hrsh7th/cmp-path";
+ --   "hrsh7th/vim-vsnip";
 
     "tpope/vim-surround";
     "simnalamburt/vim-mundo";
@@ -55,13 +59,14 @@ require('spelling')
 -- Global Key Bindings
 require('keybindings')
 
+require('coq_settings')
+
 --Plugins
 require('telescope-config')
 require('nvim-treesitter-config')
 require('nvim-lspconfig-config')
 -- require('completion-nvim-config')
---require('coq_settings')
-require('nvim-cmp-settings')
+-- require('nvim-cmp-settings')
 require('gitsigns-config')
 -- require('nvim-tree-config')
 
