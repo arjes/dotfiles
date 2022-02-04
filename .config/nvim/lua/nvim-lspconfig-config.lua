@@ -22,6 +22,10 @@ lsp.tsserver.setup{
   capabilities = capabilities
 }
 
+lsp.terraformls.setup{
+  capabilities = capabilities
+}
+
 
 vim.cmd [[
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -38,6 +42,7 @@ set shortmess+=c
 
 autocmd BufWritePre *.tsx EslintFixAll
 
+autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()
 ]]
 -- <buffer> <cmd>EslintFixAll<CR>
 
