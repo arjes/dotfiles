@@ -3,9 +3,10 @@ local actions = require('telescope.actions')
 ------------------------------
 require('telescope').setup{
   defaults = {
-    -- file_ignore_patterns = {
-    --   "vendor/*"
-    -- },
+    file_ignore_patterns = {
+      "vendor/.*",
+      "fake_[^/]+.go$"
+    },
     mappings = {
       n = {
         ["q"] = actions.close,

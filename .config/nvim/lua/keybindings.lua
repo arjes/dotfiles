@@ -13,6 +13,7 @@ map('n', '<leader>nt', ':NERDTreeToggle<cr>', {})
 map('n', '<leader>fnt', ':NERDTreeFind<cr>', {})
 map('n', '<leader>ff', ':Telescope find_files<cr>', {})
 map('n', '<leader>fg', ':Telescope live_grep<cr>', {})
+map('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers{ sort_lastused=true }<cr>", {})
 map('n', '<leader>fw', ':Telescope grep_string<cr>', {})
 map('n', '<leader>fr', ':Telescope resume<cr>', {})
 

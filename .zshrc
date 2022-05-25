@@ -95,6 +95,8 @@ aws-prod-mfa() {
   eval $(AWS_PROFILE=prod $HOME/.bin/aws-mfa $1)
 }
 
+export PATH="./bin:${PATH}"
+export PATH="./.bin:${PATH}"
 export PATH="${PATH}:${HOME}/bin"
 export PATH="${PATH}:${HOME}/.bin"
 export PATH="./node_modules/.bin/:${PATH}:${HOME}/bin"
@@ -123,3 +125,4 @@ if [[ "$TERM" == "xterm-kitty" ]]; then
 fi
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+

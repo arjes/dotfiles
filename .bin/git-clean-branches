@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+TARGET_BRANCH=$1
+
+if [ -z "$TARGET_BRANCH" ]; then
+
+  TARGET_BRANCH=$(git for-each-ref refs/heads/ "--format=%(refname:short)" | grep master)
+  if [ -z "$TARGET_BRANCH" ]; then
+    TARGET_BRANCH=$(git for-each-ref refs/heads/ "--format=%(refname:short)" | grep main)
+  fi
+fi
+
+if [ -z "$TARGET_BRANCH" ]; then
+  echo "Unable to determine target branch"
+  exit 1
+fi
+
+echo "Pruning branches squashed merged into target branch $TARGET_BRANCH"
+
+git checkout -q $TARGET_BRANCH 
+git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do 
+  mergeBase=$(git merge-base $TARGET_BRANCH $branch) && 
+    [[ $(git cherry $TARGET_BRANCH $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && 
+    git branch -D $branch && echo "Deleted Branch $branch"
+done
+echo "... Done cleaning squashed branches"
+ 
+echo "Pruning branches merged into target branch $TARGET_BRANCH"
+
+git checkout -q $TARGET_BRANCH 
+git branch --merged | grep -v $TARGET_BRANCH | while read branch; do
+  git branch -d $branch
+  echo "Deleted $branch"
+done
+echo "... Done cleaning merged branches"
+
+echo "Pruning remote branches (locally)"
+git fetch -p
+echo "... Done pruning remote branches"

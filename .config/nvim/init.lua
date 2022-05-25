@@ -28,11 +28,15 @@ require "paq" {
       "nvim-treesitter/nvim-treesitter",
       run=function() vim.cmd ':TSUpdate' end
     };
+    "RRethy/nvim-treesitter-endwise";
 
     "neovim/nvim-lspconfig";
+    -- "jose-elias-alvarez/null-ls.nvim";
 
     -- Fast but the author keeps pushing bugs :/
     { "ms-jpq/coq_nvim", branch="coq" };
+
+
  --   "hrsh7th/nvim-cmp";
  --   "hrsh7th/cmp-buffer";
  --   "hrsh7th/cmp-nvim-lsp";
@@ -42,13 +46,14 @@ require "paq" {
     "tpope/vim-surround";
     "simnalamburt/vim-mundo";
 
-    "janko-m/vim-test";
+    { "bmalinconico/vim-test", branch="enable_auto_continue" };
     "lewis6991/gitsigns.nvim";
     "unblevable/quick-scope";
     "junegunn/vim-easy-align";
     "tpope/vim-fugitive";
 
     "fatih/vim-go";
+    "sebdah/vim-delve";
 }
 
 -- General Config For All Buffers
@@ -60,6 +65,7 @@ require('spelling')
 require('keybindings')
 
 require('coq_settings')
+-- require('null_ls')
 
 --Plugins
 require('telescope-config')
@@ -74,7 +80,8 @@ require('github-theme').setup()
 
 require('lualine').setup {
   options = {
-    theme = 'github',
+    theme = 'auto',
   }
 }
 
+require('golang')
