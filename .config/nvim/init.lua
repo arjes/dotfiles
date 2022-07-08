@@ -29,9 +29,11 @@ require "paq" {
       run=function() vim.cmd ':TSUpdate' end
     };
     "RRethy/nvim-treesitter-endwise";
+    "nvim-treesitter/nvim-treesitter-context";
 
     "neovim/nvim-lspconfig";
     -- "jose-elias-alvarez/null-ls.nvim";
+    "ray-x/lsp_signature.nvim";
 
     -- Fast but the author keeps pushing bugs :/
     { "ms-jpq/coq_nvim", branch="coq" };
@@ -78,10 +80,24 @@ require('gitsigns-config')
 
 require('github-theme').setup()
 
+local current_signature = function()
+  if not pcall(require, 'lsp_signature') then return end
+  local sig = require("lsp_signature").status_line(150)
+  if not sig.hint == "" then
+    return sig.label .. "[" .. sig.hint .. "]"
+  else
+    return sig.label
+  end
+end
+
 require('lualine').setup {
   options = {
     theme = 'auto',
+  },
+  sections = { 
+     lualine_c = {'filename', current_signature} 
   }
 }
 
 require('golang')
+require('lsp_signature_config')

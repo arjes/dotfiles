@@ -30,7 +30,8 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = coq.lsp_ensure_capabilities(capabilities)
 
 lsp.solargraph.setup{
-  capabilities = capabilities
+  capabilities = capabilities;
+--  cmd = { 'bundle', 'exec', 'solargraph', 'stdio' };
 }
 lsp.gopls.setup{
   capabilities = capabilities
@@ -64,7 +65,7 @@ set shortmess+=c
 
 " autocmd BufEnter * lua require'completion'.on_attach()
 autocmd CursorHold * silent! lua vim.lsp.buf.hover()
-autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()
+" autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()
 autocmd CursorHold  * silent! lua vim.lsp.buf.document_highlight()
 autocmd CursorHoldI * silent! lua vim.lsp.buf.document_highlight()
 autocmd CursorMoved * silent! lua vim.lsp.buf.clear_references()
@@ -72,7 +73,7 @@ autocmd CursorMoved * silent! lua vim.lsp.buf.clear_references()
 
 autocmd BufWritePre *.tsx EslintFixAll
 
-autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()
+autocmd BufWritePre *.tf lua vim.lsp.buf.format()
 ]]
 -- <buffer> <cmd>EslintFixAll<CR>
 

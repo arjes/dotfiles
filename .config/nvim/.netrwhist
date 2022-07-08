@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/Users/brianmalinconico/workspace/man/c4test'
+let g:netrw_dirhist_3='/Users/brianmalinconico/workspace/soylent-green/modules/iam-groups'
+let g:netrw_dirhist_2='/Users/brianmalinconico/workspace/soylent-green/modules/user'
+let g:netrw_dirhist_1='/Users/brianmalinconico/workspace/public-api-data-export/app/internal/reportdict/tacticperformance'
+let g:netrw_dirhist_0='/Users/brianmalinconico/workspace/eks-infra/modules/linkerd'
+let g:netrw_dirhist_9='/Users/brianmalinconico/workspace/soylent-green/modules/terminus-team'
+let g:netrw_dirhist_8='/Users/brianmalinconico/workspace/soylent-green/modules/team-eks-groups'
+let g:netrw_dirhist_7='/Users/brianmalinconico/workspace/lake_front/infra/modules/lake_front_reporting_db_new'
+let g:netrw_dirhist_6='/Users/brianmalinconico/workspace/lake_front/app/vendor/googleapis'
+let g:netrw_dirhist_5='/Users/brianmalinconico/workspace/terminus/.github/workflows'
