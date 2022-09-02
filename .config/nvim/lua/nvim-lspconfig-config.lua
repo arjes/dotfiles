@@ -1,6 +1,6 @@
 local map = vim.api.nvim_set_keymap
 local lsp = require "lspconfig"
-local coq = require "coq"
+-- local coq = require "coq"
 local util = require 'lspconfig.util'
 
 require'lspconfig.configs'.regols = {
@@ -26,9 +26,12 @@ require'lspconfig.configs'.regols = {
 -- }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-capabilities = coq.lsp_ensure_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+-- capabilities = coq.lsp_ensure_capabilities(capabilities)
 
+require'lspconfig'.sorbet.setup{
+  capabilities = capabilities
+}
 lsp.solargraph.setup{
   capabilities = capabilities;
 --  cmd = { 'bundle', 'exec', 'solargraph', 'stdio' };

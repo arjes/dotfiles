@@ -30,20 +30,23 @@ require "paq" {
     };
     "RRethy/nvim-treesitter-endwise";
     "nvim-treesitter/nvim-treesitter-context";
+   "nvim-treesitter/playground";
+   "nvim-treesitter/nvim-treesitter-textobjects";
 
     "neovim/nvim-lspconfig";
     -- "jose-elias-alvarez/null-ls.nvim";
     "ray-x/lsp_signature.nvim";
 
     -- Fast but the author keeps pushing bugs :/
-    { "ms-jpq/coq_nvim", branch="coq" };
+    -- { "ms-jpq/coq_nvim", branch="coq" };
 
 
- --   "hrsh7th/nvim-cmp";
- --   "hrsh7th/cmp-buffer";
- --   "hrsh7th/cmp-nvim-lsp";
- --   "hrsh7th/cmp-path";
- --   "hrsh7th/vim-vsnip";
+   "hrsh7th/nvim-cmp";
+   "hrsh7th/cmp-buffer";
+   "hrsh7th/cmp-nvim-lsp";
+   "hrsh7th/cmp-path";
+   "hrsh7th/vim-vsnip";
+   'hrsh7th/cmp-vsnip';
 
     "tpope/vim-surround";
     "simnalamburt/vim-mundo";
@@ -56,6 +59,8 @@ require "paq" {
 
     "fatih/vim-go";
     "sebdah/vim-delve";
+
+    {"bmalinconico/neorg", branch="work_without_cd"};
 }
 
 -- General Config For All Buffers
@@ -66,7 +71,6 @@ require('spelling')
 -- Global Key Bindings
 require('keybindings')
 
-require('coq_settings')
 -- require('null_ls')
 
 --Plugins
@@ -74,7 +78,12 @@ require('telescope-config')
 require('nvim-treesitter-config')
 require('nvim-lspconfig-config')
 -- require('completion-nvim-config')
--- require('nvim-cmp-settings')
+
+--require('coq_settings')
+-- This needs to be above cmp since it will overwrite tab then pass it along
+require('nvim-vsnip-settings')
+require('nvim-cmp-settings')
+
 require('gitsigns-config')
 -- require('nvim-tree-config')
 
@@ -101,3 +110,5 @@ require('lualine').setup {
 
 require('golang')
 require('lsp_signature_config')
+require('neorg-config')
+require('treesitter-text-objects-config')

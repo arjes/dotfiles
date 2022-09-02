@@ -10,28 +10,21 @@ cmp.setup({
     end,
   },
   mapping = {
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<esc>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm({ select = false }),
+    ['<C-Space>'] = cmp.mapping.confirm({ select = true }),
     ['<Tab>'] = function(fallback)
       local cmp = require('cmp')
-      if #cmp.core:get_sources() > 0 and not cmp.get_config().experimental.native_menu then
-        if cmp.visible() then
-          cmp.select_next_item()
-        else
-          cmp.complete()
-        end
+      if cmp.visible() then
+        cmp.select_next_item()
       else
         fallback()
       end
     end,
     ['<S-Tab>'] = function(fallback)
       local cmp = require('cmp')
-      if #cmp.core:get_sources() > 0 and not cmp.get_config().experimental.native_menu then
-        if cmp.visible() then
-          cmp.select_prev_item()
-        else
-          cmp.complete()
-        end
+      if cmp.visible() then
+        cmp.select_prev_item()
       else
         fallback()
       end
@@ -39,6 +32,7 @@ cmp.setup({
   },
   sources = {
     { name = 'nvim_lsp', max_item_count = 10 },
+    { name = 'vsnip' },
     { 
       name = 'buffer',
       option = {
@@ -47,6 +41,7 @@ cmp.setup({
         end
       }
     },
+    { name = 'neorg' },
     { name = 'path' },
   }
 })
