@@ -27,12 +27,6 @@ map('n', '<leader>yy', '"+yy', {noremap = true})
 map('n', '<leader>r', ':set opfunc=ChangePaste<CR>g@', {silent=true})
 
 
-map('n', '<leader>t', ':TestNearest<CR>', {silent = true})
-map('n', '<leader>T', ':TestFile<CR>', {silent = true})
-map('n', '<leader>a', ':TestSuite<CR>', {silent = true})
-map('n', '<leader>l', ':TestLast<CR>', {silent = true})
-map('n', '<leader>g', ':TestVisit<CR>', {silent = true})
-
 vim.cmd [[
 let test#strategy = "neovim"
 

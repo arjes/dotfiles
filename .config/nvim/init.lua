@@ -51,7 +51,16 @@ require "paq" {
     "tpope/vim-surround";
     "simnalamburt/vim-mundo";
 
+    -- Fallback
     { "bmalinconico/vim-test", branch="enable_auto_continue" };
+
+    "nvim-neotest/neotest";
+    "nvim-neotest/neotest-plenary";
+    "olimorris/neotest-rspec";
+    "nvim-neotest/neotest-go";
+    "nvim-neotest/neotest-vim-test";
+    "antoinemadec/FixCursorHold.nvim";
+
     "lewis6991/gitsigns.nvim";
     "unblevable/quick-scope";
     "junegunn/vim-easy-align";
@@ -60,7 +69,7 @@ require "paq" {
     "fatih/vim-go";
     "sebdah/vim-delve";
 
-    {"bmalinconico/neorg", branch="work_without_cd"};
+    -- {"bmalinconico/neorg", branch="work_without_cd"};
 }
 
 -- General Config For All Buffers
@@ -110,5 +119,6 @@ require('lualine').setup {
 
 require('golang')
 require('lsp_signature_config')
-require('neorg-config')
+-- require('neorg-config')
 require('treesitter-text-objects-config')
+require('neotest-config')

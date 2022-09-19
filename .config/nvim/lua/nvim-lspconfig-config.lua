@@ -56,6 +56,10 @@ lsp.regols.setup{
   capabilities = capabilities
 }
 
+lsp.ccls.setup{
+  capabilities = capabilities
+}
+
 vim.cmd [[
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -67,12 +71,10 @@ set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 
 " autocmd BufEnter * lua require'completion'.on_attach()
-autocmd CursorHold * silent! lua vim.lsp.buf.hover()
 " autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()
 autocmd CursorHold  * silent! lua vim.lsp.buf.document_highlight()
 autocmd CursorHoldI * silent! lua vim.lsp.buf.document_highlight()
 autocmd CursorMoved * silent! lua vim.lsp.buf.clear_references()
-
 
 autocmd BufWritePre *.tsx EslintFixAll
 
@@ -80,6 +82,7 @@ autocmd BufWritePre *.tf lua vim.lsp.buf.format()
 ]]
 -- <buffer> <cmd>EslintFixAll<CR>
 
+map('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<cr>', {noremap = true})
 -- map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<cr>', {noremap = true})
 map('n', 'gd', '<Cmd>Telescope lsp_definitions<cr>', {noremap = true})
 --map('n', 'gi', '<Cmd>lua vim.lsp.buf.implementation()<cr>', {noremap = true})

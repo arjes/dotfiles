@@ -47,9 +47,10 @@ require('neorg').setup {
 
 local map = vim.api.nvim_set_keymap
 
-map('n', '<leader>tc', '<Cmd>Neorg keybind norg core.gtd.base.capture<CR>', {noremap = true})
-map('n', '<leader>tv', '<Cmd>Neorg keybind norg core.gtd.base.views<CR>', {noremap = true})
-map('n', '<leader>te', '<Cmd>Neorg keybind norg core.gtd.base.edit<CR>', {noremap = true})
+-- These conflict with vim test
+-- map('n', '<leader>tc', '<Cmd>Neorg keybind norg core.gtd.base.capture<CR>', {noremap = true})
+-- map('n', '<leader>tv', '<Cmd>Neorg keybind norg core.gtd.base.views<CR>', {noremap = true})
+-- map('n', '<leader>te', '<Cmd>Neorg keybind norg core.gtd.base.edit<CR>', {noremap = true})
 map('n', '<leader>nn', '<Cmd>Neorg keybind norg core.norg.dirman.new.note<CR>', {noremap = true})
 
 -- Journal commands
