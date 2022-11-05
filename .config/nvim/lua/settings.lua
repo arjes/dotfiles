@@ -12,12 +12,13 @@ vim.opt.shiftwidth=2
 vim.opt.softtabstop=2
 vim.opt.backspace="indent,eol,start"
 vim.opt.expandtab=true
-vim.opt.spell=false
+vim.opt.spell=true
 vim.opt.spelllang="en_us"
 vim.opt.timeoutlen=500
 vim.opt.undofile=true
 vim.opt.undodir="~/.vim/undo,/tmp"
 vim.opt.updatetime=1000
 vim.opt.completeopt="menuone,noinsert,noselect,preview"
+vim.opt.mouse=""
 
 

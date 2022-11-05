@@ -1,16 +1,23 @@
+-- Netrw disabled for nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
  ----- Directories {{{
+ --
 vim.opt.directory="~/.vim/swap,/tmp"
 vim.opt.undofile=true
 vim.opt.backupdir="~/.vim/backup,/tmp"
+vim.opt.undodir="~/.vim/undo,/tmp"
 vim.opt.undodir="~/.vim/undo,/tmp"
 ----- }}}
 
 -- Plugins {{{
 require "paq" {
     "savq/paq-nvim";
-    -- "kyazdani42/nvim-web-devicons";
-    -- "kyazdani42/nvim-tree.lua";
-    "scrooloose/nerdtree";
+    "kyazdani42/nvim-web-devicons";
+    "kyazdani42/nvim-tree.lua";
+   
+    -- "scrooloose/nerdtree";
     "hoob3rt/lualine.nvim";
     "projekt0n/github-nvim-theme";
 
@@ -48,7 +55,8 @@ require "paq" {
    "hrsh7th/vim-vsnip";
    'hrsh7th/cmp-vsnip';
 
-    "tpope/vim-surround";
+    -- "tpope/vim-surround";
+    "kylechui/nvim-surround";
     "simnalamburt/vim-mundo";
 
     -- Fallback
@@ -62,7 +70,11 @@ require "paq" {
     "antoinemadec/FixCursorHold.nvim";
 
     "lewis6991/gitsigns.nvim";
-    "unblevable/quick-scope";
+
+    -- Highlights a unique word on each line
+    --"unblevable/quick-scope";
+    "ggandor/leap.nvim";
+
     "junegunn/vim-easy-align";
     "tpope/vim-fugitive";
 
@@ -117,8 +129,12 @@ require('lualine').setup {
   }
 }
 
+require("nvim-surround").setup({})
+
 require('golang')
 require('lsp_signature_config')
 -- require('neorg-config')
 require('treesitter-text-objects-config')
 require('neotest-config')
+
+ require('leap').add_default_mappings()

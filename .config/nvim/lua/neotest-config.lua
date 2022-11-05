@@ -32,7 +32,8 @@ require("neotest").setup({
 local map = vim.api.nvim_set_keymap;
 
 map('n', '<leader>t', ":lua require('neotest').run.run()<CR>", {silent = true})
-map('n', '<leader>ts', ":lua require('neotest').summary.open()<CR>", {silent = true})
+map('n', '<leader>ta', ":lua require('neotest').run.attach()<CR>", {silent = true})
+map('n', '<leader>ts', ":lua require('neotest').summary.toggle()<CR>", {silent = true})
 map('n', '<leader>to', ":lua require('neotest').output.open()<CR>", {silent = true})
 map('n', '<leader>T', ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>", {silent = true})
 map('n', '<leader>l', ":lua require('neotest').run.run_last()<CR>", {silent = true})

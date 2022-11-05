@@ -5,6 +5,8 @@ require('telescope').setup{
   defaults = {
     file_ignore_patterns = {
       "vendor/.*",
+      "sorbet/.*.rbi",
+      "grpc_gateway/generated/.*",
       "fake_[^/]+.go$"
     },
     mappings = {

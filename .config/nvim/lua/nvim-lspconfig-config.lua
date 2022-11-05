@@ -26,7 +26,7 @@ require'lspconfig.configs'.regols = {
 -- }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 -- capabilities = coq.lsp_ensure_capabilities(capabilities)
 
 require'lspconfig'.sorbet.setup{
@@ -90,7 +90,7 @@ map('n', 'gi', '<Cmd>lua require("telescope.builtin").lsp_implementations{ sort_
 map('n', 'gh', '<Cmd>lua vim.lsp.buf.signature_help()<cr>', {noremap = true})
 map('n', 'gr', '<Cmd>lua vim.lsp.buf.rename()<cr>', {noremap = true})
 map('n', '<leader>e', '<Cmd>lua vim.diagnostic.open_float()<cr>', {noremap = true})
-map('n', 'af', '<Cmd>lua vim.lsp.buf.formatting()<cr>', {noremap = true})
+map('n', 'af', '<Cmd>lua vim.lsp.buf.format { async = true }<cr>', {noremap = true})
 
 map('n', 'ai', '<Cmd>lua vim.lsp.buf.code_action()<cr>', {noremap = true})
 

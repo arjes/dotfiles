@@ -10,8 +10,32 @@ map('i', '<esc>', '<nop>', {noremap = true})
 map('n', '<leader>u', ':MundoToggle<cr>', {noremap = true})
 
 -- File Tree Navigation
-map('n', '<leader>nt', ':NERDTreeToggle<cr>', {})
-map('n', '<leader>fnt', ':NERDTreeFind<cr>', {})
+-- NERDTRee Version
+-- map('n', '<leader>nt', ':NERDTreeToggle<cr>', {})
+-- map('n', '<leader>fnt', ':NERDTreeFind<cr>', {})
+-- nvim-tree
+require("nvim-tree").setup({
+  git = {
+    ignore = true
+  },
+  filters = {
+    dotfiles = true
+  },
+  view = {
+    adaptive_size = false,
+    mappings = {
+      list = {
+        { key = "s",                          action = "vsplit" },
+        { key = "h",                          action = "split" },
+        { key = "t",                          action = "tabnew" },
+      },
+    },
+  },
+})
+map('n', '<leader>nt', ':NvimTreeToggle<cr>', {})
+-- Note the bang forces the root to change.
+map('n', '<leader>fnt', ':NvimTreeFindFile!<cr>', {})
+-- End nvim-tree
 map('n', '<leader>ff', ':Telescope find_files<cr>', {})
 map('n', '<leader>fg', ':Telescope live_grep<cr>', {})
 map('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers{ sort_lastused=true }<cr>", {})
