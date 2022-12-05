@@ -41,11 +41,11 @@ map('n', '<leader>l', ":lua require('neotest').run.run_last()<CR>", {silent = tr
 local augroup = vim.api.nvim_create_augroup 
 local autocmd = vim.api.nvim_create_autocmd
 
-augroup('AutoRunGroups', { clear = true })
+local group = augroup('NeotestAuGroup', { clear = true })
 
 autocmd('BufReadPost', {
   pattern = '*_spec.rb',
-  group = 'AutoRunGroups',
+  group = group,
   callback = function()
     require('neotest').run.run(vim.fn.expand('%'))
   end
@@ -53,11 +53,29 @@ autocmd('BufReadPost', {
 
 autocmd('BufWritePost', {
   pattern = '*_spec.rb',
-  group = 'AutoRunGroups',
+  group = group,
   callback = function()
     require('neotest').run.run()
   end
 })
+
+autocmd("FileType", {
+  pattern = "neotest-output,neotest-attach",
+  group = group,
+  callback = function(opts)
+    -- Allow simple Q to quit the window
+    vim.keymap.set("n", "q", function()
+      pcall(vim.api.nvim_win_close, 0, true)
+    end, {
+        buffer = opts.buf,
+      })
+
+    -- Use my normal jk to get out of the terminal insert mode
+    vim.keymap.set("t", "jk", '<C-\\><C-n>', { buffer = opts.buf})
+
+  end,
+})
+
 
 
 -- Old vim-test config 
