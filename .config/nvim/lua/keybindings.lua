@@ -7,8 +7,6 @@ map('n', '<leader>evc', ':edit $MYVIMRC<CR>', {noremap = true})
 map('n', '<leader>rvc', ':luafile $MYVIMRC<CR>', {noremap = true})
 map('i', '<esc>', '<nop>', {noremap = true})
 
-map('n', '<leader>u', ':MundoToggle<cr>', {noremap = true})
-
 -- Copy to clipboard
 map('v', '<leader>y', '"+y', {noremap = true})
 map('n', '<leader>Y', '"+yg_', {noremap = true})
