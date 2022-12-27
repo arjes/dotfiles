@@ -1,3 +1,5 @@
+
+
 local status_ok, tabnine = pcall(require, "cmp_tabnine.config")
 
 if status_ok then
@@ -34,7 +36,12 @@ end
 
 local status_ok, tabnine_full_text = pcall(require, "tabnine")
 
-require('tabnine').setup({
+if not status_ok then 
+  vim.notify("tabnine not found")
+  return
+end
+
+tabnine_full_text.setup({
   disable_auto_comment=true,
   accept_keymap="<Tab>",
   debounce_ms = 300,
