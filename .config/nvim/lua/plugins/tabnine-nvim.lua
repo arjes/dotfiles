@@ -4,7 +4,7 @@ local M = {
   "codota/tabnine-nvim",
   event = "InsertEnter",
   build= './dl_binaries.sh',
-  enabled = enabled
+  enabled = enabled,
   dependencies = {
     "hrsh7th/nvim-cmp",
   }
