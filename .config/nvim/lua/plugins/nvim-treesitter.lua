@@ -48,9 +48,6 @@ function M.config()
         node_decremental = "grm",
       },
     },
-    endwise = {
-      enable = true,
-    },
   }
 end
 
