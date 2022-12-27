@@ -9,12 +9,6 @@ map('i', '<esc>', '<nop>', {noremap = true})
 
 map('n', '<leader>u', ':MundoToggle<cr>', {noremap = true})
 
-map('n', '<leader>ff', ':Telescope find_files<cr>', {})
-map('n', '<leader>fg', ':Telescope live_grep<cr>', {})
-map('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers{ sort_lastused=true }<cr>", {})
-map('n', '<leader>fw', ':Telescope grep_string<cr>', {})
-map('n', '<leader>fr', ':Telescope resume<cr>', {})
-
 -- Copy to clipboard
 map('v', '<leader>y', '"+y', {noremap = true})
 map('n', '<leader>Y', '"+yg_', {noremap = true})
@@ -26,10 +20,6 @@ map('n', '<leader>r', ':set opfunc=ChangePaste<CR>g@', {silent=true})
 
 vim.cmd [[
 let test#strategy = "neovim"
-
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-
 
 function! ChangePaste(type, ...)
     silent exe "normal! `[v`]\"_c"

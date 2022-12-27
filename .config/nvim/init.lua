@@ -15,23 +15,4 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
-
 require("lazy").setup('plugins')
-
--- require 'plugins.setup'
-require 'languages'
-
--- Netrw disabled for nvim-tree
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
-
-
--- Global Key Bindings
-
-
--- This needs to be above cmp since it will overwrite tab then pass it along
--- require('nvim-tree-config')
-
--- require('neorg-config')
-

@@ -19,6 +19,7 @@ local M = {
     "nvim-neotest/neotest-go",
     "nvim-neotest/neotest-vim-test",
     "antoinemadec/FixCursorHold.nvim",
+    { "bmalinconico/vim-test", branch="enable_auto_continue" }
   }
 }
 
