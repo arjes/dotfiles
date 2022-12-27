@@ -44,88 +44,45 @@ cmp.setup({
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
-  -- formatting = {
-  --   fields = {"abbr", "kind", "menu" },
-  --   format = function(entry, vim_item)
+  formatting = {
+    fields = {"abbr", "kind", "menu" },
+    format = function(entry, vim_item)
 
-  --     if entry.source.name == "cmp_tabnine" then
-  --       vim_item.kind = icons.tools.Tabnine
-  --       vim_item.kind_hl_group = "CmpItemKindTabnine"
-  --     end
-  --     
-  --     if entry.source.name == "copilot" then
-  --       vim_item.kind = icons.tools.Copilot
-  --       vim_item.kind_hl_group = "CmpItemKindCopilot"
-  --     end
+      if entry.source.name == "cmp_tabnine" then
+        vim_item.kind = icons.tools.Tabnine
+        vim_item.kind_hl_group = "CmpItemKindTabnine"
+      end
+      
+      if entry.source.name == "copilot" then
+        vim_item.kind = icons.tools.Copilot
+        vim_item.kind_hl_group = "CmpItemKindCopilot"
+      end
 
-  --     -- NOTE: order matters
-  --     -- vim_item.menu = ({
-  --     --   nvim_lsp = "",
-  --     --   nvim_lua = "",
-  --     --   luasnip = "",
-  --     --   buffer = "",
-  --     --   path = "",
-  --     --   emoji = "",
-  --     -- })[entry.source.name]
-  --     return vim_item
-  --   end,
+      -- NOTE: order matters
+      -- vim_item.menu = ({
+      --   nvim_lsp = "",
+      --   nvim_lua = "",
+      --   luasnip = "",
+      --   buffer = "",
+      --   path = "",
+      --   emoji = "",
+      -- })[entry.source.name]
+      return vim_item
+    end,
   },
   sources = {
-    { name = 'nvim_lsp', max_item_count = 10, group_index =3 },
     { 
-      name = 'cmp_tabnine',
-      group_index = 2,
-      trigger_characters = {
-        ".",
-        ":",
-        "(",
-        "'",
-        '"',
-        "[",
-        ",",
-        "#",
-        "*",
-        "@",
-        "|",
-        "=",
-        "-",
-        "{",
-        "/",
-        "\\",
-        "+",
-        "?",
-        " ",
-        -- "\t",
-        "\n",
-      },
+      name = 'nvim_lsp',
+      max_item_count = 10,
+      group_index =2,
+      entry_filter = function(entry, ctx)
+        local isSorbetUntyped = not string.find(entry:get_word(),  'T.untyped')
+
+        return isSorbetUntyped
+      end
     },
-    { 
-      name = "copilot",
-      group_index = 2,
-      trigger_characters = {
-        ".",
-        ":",
-        "(",
-        "'",
-        '"',
-        "[",
-        ",",
-        "#",
-        "*",
-        "@",
-        "|",
-        "=",
-        "-",
-        "{",
-        "/",
-        "\\",
-        "+",
-        "?",
-        " ",
-        -- "\t",
-        -- "\n",
-      },
-    },
+    { name = 'cmp_tabnine', group_index = 2 },
+    { name = "copilot", group_index = 2 },
     { name = 'vsnip', group_index = 4 },
     { 
       name = 'buffer',
@@ -136,8 +93,8 @@ cmp.setup({
         end
       }
     },
-    -- { name = 'neorg' },
     { name = 'path', group_index = 4},
   }
 })
 
+-- inoremap <C-x> <Cmd>lua require('cmp').complete({ config = { sources = { { name = 'copilot' } } } })<CR>
