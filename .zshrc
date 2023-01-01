@@ -52,7 +52,7 @@ alias clean-branches="git checkout master; git fetch; git rebase; git branch --m
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git asdf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -123,6 +123,8 @@ fi
 if [[ "$TERM" == "xterm-kitty" ]]; then
   alias ssh="kitty +kitten ssh"
 fi
+
+[[ ! -f $HOME/.asdf/asdf.sh ]] || . $HOME/.asdf/asdf.sh
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export EDITOR=nvim
