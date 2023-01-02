@@ -55,11 +55,11 @@ alias clean-branches="git checkout master; git fetch; git rebase; git branch --m
 plugins=(git asdf)
 
 source $ZSH/oh-my-zsh.sh
+ 
+# Rbenv
 
-## Rbenv
+# Local bin files first!
 
-## Local bin files first!
-#
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
@@ -76,15 +76,6 @@ ssh-add ~/.ssh/id_rsa &> /dev/null
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-
-if type "rbenv" > /dev/null; then
-  eval "$(rbenv init -)"
-fi
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 
 # Agnoster theme customization
 # prompt_dir() {
@@ -112,7 +103,7 @@ export PATH=$PATH:~/Library/Android/sdk/tools/
 
 ###-tns-completion-start-###
 if [ -f /Users/brianmalinconico/.tnsrc ]; then 
-    source /Users/brianmalinconico/.tnsrc 
+  source /Users/brianmalinconico/.tnsrc 
 fi
 ###-tns-completion-end-###
 
@@ -131,3 +122,4 @@ export EDITOR=nvim
 export SHELL="$(which zsh)"
 
 alias copper="bundle exec rubocop -A && git commit -am 'Copper' && git push"
+
