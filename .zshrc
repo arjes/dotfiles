@@ -52,14 +52,14 @@ alias clean-branches="git checkout master; git fetch; git rebase; git branch --m
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git asdf)
 
 source $ZSH/oh-my-zsh.sh
+ 
+# Rbenv
 
-## Rbenv
+# Local bin files first!
 
-## Local bin files first!
-#
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
@@ -76,15 +76,6 @@ ssh-add ~/.ssh/id_rsa &> /dev/null
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-
-if type "rbenv" > /dev/null; then
-  eval "$(rbenv init -)"
-fi
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 
 # Agnoster theme customization
 # prompt_dir() {
@@ -112,7 +103,7 @@ export PATH=$PATH:~/Library/Android/sdk/tools/
 
 ###-tns-completion-start-###
 if [ -f /Users/brianmalinconico/.tnsrc ]; then 
-    source /Users/brianmalinconico/.tnsrc 
+  source /Users/brianmalinconico/.tnsrc 
 fi
 ###-tns-completion-end-###
 
@@ -124,8 +115,11 @@ if [[ "$TERM" == "xterm-kitty" ]]; then
   alias ssh="kitty +kitten ssh"
 fi
 
+[[ ! -f $HOME/.asdf/asdf.sh ]] || . $HOME/.asdf/asdf.sh
+
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export EDITOR=nvim
 export SHELL="$(which zsh)"
 
 alias copper="bundle exec rubocop -A && git commit -am 'Copper' && git push"
+
