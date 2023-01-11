@@ -33,7 +33,12 @@ function M.config()
   neotest.setup({
     output = {
       enabled = true,
-      open_on_run = "short"
+      open_on_run = "short",
+      auto_continue = false,
+    },
+    quickfix = {
+      enabled = false,
+      open = false,
     },
     adapters = {
       require("neotest-plenary"),

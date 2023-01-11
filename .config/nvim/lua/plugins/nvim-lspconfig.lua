@@ -53,10 +53,10 @@ function M.config()
     terraformls = {},
     regols = {},
     ccls = {},
-    -- solargraph = {
-    --   capabilities = capabilities,
-    --   cmd = { 'bundle', 'exec', 'solargraph', 'stdio' },
-    -- }
+    solargraph = {
+      capabilities = capabilities,
+      cmd = { 'bundle', 'exec', 'solargraph', 'stdio' },
+    }
   }
 
   local options = {
@@ -73,9 +73,6 @@ function M.config()
   end
 
   vim.cmd [[
-    inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
     " Set completeopt to have a better completion experience
     set completeopt=menuone,noinsert,noselect
 

@@ -5,7 +5,9 @@ local M = {
   event = "InsertEnter",
   build= './dl_binaries.sh',
   enabled = enabled,
+  version = "bdc60d9fbec793164f3f67c68bcec3f9ef9b18d7",
   dependencies = {
+    -- This plugin must be loaded after nvim-cmp
     "hrsh7th/nvim-cmp",
   }
 }

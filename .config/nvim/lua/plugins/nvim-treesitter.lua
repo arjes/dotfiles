@@ -31,6 +31,7 @@ function M.config()
       "typescript";
       "yaml";
       "query";
+      "markdown";
     },
     highlight = {
       enable = true,

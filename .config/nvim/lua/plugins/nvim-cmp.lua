@@ -1,6 +1,8 @@
 local M = {
+  enabled = true,
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
+  -- This plugin must be loaded before tabnine-nvim
   dependencies = {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-nvim-lsp",
@@ -89,7 +91,11 @@ function M.config()
         max_item_count = 10,
         group_index =2,
         entry_filter = function(entry, ctx)
-          local isSorbetUntyped = not string.find(entry:get_word(),  'T.untyped')
+          local isSorbetUntyped = not (
+             string.find(entry:get_word(),  'T.untyped') 
+          or string.find(entry:get_word(),  'file is not `# typed: true` or higher') 
+        )
+          
 
           return isSorbetUntyped
         end
