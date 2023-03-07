@@ -14,7 +14,7 @@ function M.config()
   end
   lualine.setup {
     options = {
-      theme = 'auto',
+      theme = 'tokyonight',
     }
   }
 end

@@ -62,8 +62,6 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
-export PATH="$HOME/.rbenv/bin:$PATH"
-alias sforeman="foreman start | tee -a log/foreman.log"
 
 if type "nvim" > /dev/null; then
   alias vim="nvim"
@@ -85,6 +83,9 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 aws-prod-mfa() {
   eval $(AWS_PROFILE=prod $HOME/.bin/aws-mfa $1)
 }
+
+# This needs to go before my custom path meddling 
+[[ ! -f $HOME/.asdf/asdf.sh ]] || . $HOME/.asdf/asdf.sh
 
 export PATH="./bin:${PATH}"
 export PATH="./.bin:${PATH}"
@@ -115,7 +116,6 @@ if [[ "$TERM" == "xterm-kitty" ]]; then
   alias ssh="kitty +kitten ssh"
 fi
 
-[[ ! -f $HOME/.asdf/asdf.sh ]] || . $HOME/.asdf/asdf.sh
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export EDITOR=nvim

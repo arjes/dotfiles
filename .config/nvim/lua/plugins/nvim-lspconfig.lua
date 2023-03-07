@@ -59,8 +59,22 @@ function M.config()
     }
   }
 
+  local function on_attach(client, bufnr)
+    -- Find the clients capabilities
+    if client.supports_method('textDocument/documentHighlight') then
+      vim.cmd [[
+        augroup LspHighlight
+        autocmd!
+        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+        augroup END
+      ]]
+    end
+  end
+
+
   local options = {
-    -- on_attach = on_attach,
+    on_attach = on_attach,
     capabilities = capabilities,
     flags = {
       debounce_text_changes = 150,
@@ -78,12 +92,6 @@ function M.config()
 
     " Avoid showing message extra message when using completion
     set shortmess+=c
-
-    " autocmd BufEnter * lua require'completion'.on_attach()
-    " autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()
-    autocmd CursorHold  * silent! lua vim.lsp.buf.document_highlight()
-    autocmd CursorHoldI * silent! lua vim.lsp.buf.document_highlight()
-    autocmd CursorMoved * silent! lua vim.lsp.buf.clear_references()
 
     autocmd BufWritePre *.tsx EslintFixAll
 

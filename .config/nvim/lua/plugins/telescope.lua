@@ -32,7 +32,8 @@ function M.config()
         "vendor/.*",
         "sorbet/.*.rbi",
         "grpc_gateway/generated/.*",
-        "fake_[^/]+.go$"
+        "fake_[^/]+.go$",
+        "^proto_gen/"
       },
       mappings = {
         n = {

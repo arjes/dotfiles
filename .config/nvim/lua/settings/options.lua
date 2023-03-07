@@ -1,6 +1,6 @@
-vim.opt.backupdir="~/.vim/backup,/tmp"
-vim.opt.directory="~/.vim/swap,/tmp"
-vim.opt.undodir="~/.vim/undo,/tmp"
+-- vim.opt.backupdir="~/.vim/backup,/tmp"
+-- vim.opt.directory="~/.vim/swap,/tmp"
+-- vim.opt.undodir="~/.vim/undo,/tmp"
 vim.opt.undofile=true
 vim.opt.relativenumber=true
 vim.opt.number=true

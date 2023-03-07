@@ -5,30 +5,50 @@ local M = {
     'BufWritePre *_spec.rb,*_test.go',
   },
   keys = {
-    { '<leader>t', "<cmd>lua require('neotest').run.run()<CR>", {silent = true} },
+    -- We are running a cmd here to identify the type
+    { '<leader>t', '<cmd>lua require("plugins.neotest").runNearest()<CR>', {silent = true} },
     { '<leader>ta', "<cmd>lua require('neotest').run.attach()<CR>", {silent = true} },
     { '<leader>ts', "<cmd>lua require('neotest').summary.toggle()<CR>", {silent = true} },
-    { '<leader>to', "<cmd>lua require('neotest').output.open()<CR>", {silent = true} },
-    { '<leader>T', "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", {silent = true} },
-    { '<leader>l', "<cmd>lua require('neotest').run.run_last()<CR>", {silent = true} },
+    { '<leader>to', "<cmd>lua require('neotest').output.open({ enter = true })<CR>", {silent = true} },
+    { '<leader>T', '<cmd>lua require("plugins.neotest").runFile()<CR>', {silent = true} },
+    { '<leader>l', '<cmd>lua require("plugins.neotest").runLast()<CR>', {silent = true} },
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-neotest/neotest-plenary",
     "olimorris/neotest-rspec",
-    "nvim-neotest/neotest-go",
-    "nvim-neotest/neotest-vim-test",
     "antoinemadec/FixCursorHold.nvim",
     { "bmalinconico/vim-test", branch="enable_auto_continue" }
   }
 }
 
-function M.config()
-  local status_ok, neotest = pcall(require, "neotest")
-  if not status_ok then
-    vim.notify("neotest not found")
-    return
+-- These functions delegate to vim-test for go files since it handles debugging
+function M.runNearest()
+  if vim.bo.filetype == "go" then
+    vim.cmd("TestNearest")
+  else
+    require('neotest').run.run()
   end
+end
+
+function M.runFile()
+  if vim.bo.filetype == "go" then
+    vim.cmd("TestFile")
+  else
+    require('neotest').run.run(vim.fn.expand('%'))
+  end
+end
+
+function M.runLast()
+  if vim.bo.filetype == "go" then
+    vim.cmd("TestLast")
+  else
+    require('neotest').run.run_last()
+  end
+end
+
+function M.config()
+  neotest = require("neotest")
 
   neotest.setup({
     output = {
@@ -42,11 +62,7 @@ function M.config()
     },
     adapters = {
       require("neotest-plenary"),
-      require("neotest-go"),
       require("neotest-rspec"),
-      require("neotest-vim-test")({
-        ignore_file_types = { "ruby", "go" },
-      }),
     },
   })
 
@@ -98,14 +114,14 @@ function M.config()
       vim.keymap.set("n", "q", function()
         pcall(vim.api.nvim_win_close, 0, true)
       end, {
-      buffer = opts.buf,
-    })
+          buffer = opts.buf,
+        })
 
-    -- Use my normal jk to get out of the terminal insert mode
-    vim.keymap.set("t", "jk", '<C-\\><C-n>', { buffer = opts.buf})
+      -- Use my normal jk to get out of the terminal insert mode
+      vim.keymap.set("t", "jk", '<C-\\><C-n>', { buffer = opts.buf})
 
-  end,
-})
+    end,
+  })
 end
 
 return M

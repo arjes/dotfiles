@@ -1,11 +1,17 @@
 return {
+  -- { 
+  --   "projekt0n/github-nvim-theme", 
+  --   name = "selected_theme",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require('github-theme').setup()
+  --   end,
+  -- },
   { 
-    "projekt0n/github-nvim-theme", 
+    "folke/tokyonight.nvim", 
     name = "selected_theme",
-    event = "VeryLazy",
     config = function()
-      vim.notify("Loading the theme")
-      require('github-theme').setup()
+      vim.cmd[[colorscheme tokyonight-night]]
     end,
   },
 

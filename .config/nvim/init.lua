@@ -16,3 +16,6 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup('plugins')
+
+
+require 'golang'
