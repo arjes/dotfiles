@@ -16,6 +16,14 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup('plugins')
+-- require("lazy").setup({
+--   {
+--     "pmizio/typescript-tools.nvim",
+--     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+--     opts = {},
+--   }
+-- })
 
 
 require 'golang'
+require 'js_ts'

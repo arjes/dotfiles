@@ -6,6 +6,9 @@ local M = {
     { '<leader>fb', "<cmd>lua require('telescope.builtin').buffers{ sort_lastused=true }<cr>", {} },
     { '<leader>fw', ':Telescope grep_string<cr>', {} },
     { '<leader>fr', ':Telescope resume<cr>', {} },
+    { 'gd', '<Cmd>Telescope lsp_definitions<cr>', {noremap = true} },
+    { 'gw', '<Cmd>Telescope lsp_references<cr>', {noremap = true} },
+    { 'gi', '<Cmd>lua require("telescope.builtin").lsp_implementations{ sort_lastused=true }<cr>', {noremap = true} },
   },
   dependencies = {
     "nvim-lua/plenary.nvim",

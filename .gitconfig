@@ -9,7 +9,8 @@
 	ui = always
 [user]
 	name = Brian Malinconico
-	email = bmalinconico@terminus.com
+	email = brian.malinconico@terminus.com
+	signingkey = 94BA5A6DAD07B16C
 [push]
   default = current
 [core]
@@ -30,3 +31,5 @@
 	smudge = git-lfs smudge -- %f
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[commit]
+	gpgsign = true

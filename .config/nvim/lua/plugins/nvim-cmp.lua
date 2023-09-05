@@ -92,29 +92,38 @@ function M.config()
         group_index =2,
         entry_filter = function(entry, ctx)
           local isSorbetUntyped = not (
-             string.find(entry:get_word(),  'T.untyped') 
-          or string.find(entry:get_word(),  'file is not `# typed: true` or higher') 
-        )
-          
+               string.find(entry:get_word(),  'T.untyped') 
+            or string.find(entry:get_word(),  'file is not `# typed: true` or higher') 
+          )
 
           return isSorbetUntyped
         end
       },
       { name = 'cmp_tabnine', group_index = 2 },
       { name = "copilot", group_index = 2 },
-      { name = 'vsnip', group_index = 4 },
       { 
         name = 'buffer',
-        group_index = 3,
+        group_index = 2,
         option = {
           get_bufnrs = function()
             return vim.api.nvim_list_bufs()
           end
         }
       },
+      { name = 'vsnip', group_index = 4 },
       { name = 'path', group_index = 4},
     }
   })
+  
+  -- Show/Hide copilot suggestion based when the cmp menu is visible
+  cmp.event:on("menu_opened", function()
+    vim.b.copilot_suggestion_hidden = true
+  end)
+
+  cmp.event:on("menu_closed", function()
+    vim.b.copilot_suggestion_hidden = false
+  end)
+
 
   vim.cmd [[
     imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'

@@ -5,14 +5,11 @@ local M = {
   -- map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<cr>', {noremap = true})
   --map('n', 'gi', '<Cmd>lua vim.lsp.buf.implementation()<cr>', {noremap = true})
   { 'K', '<Cmd>lua vim.lsp.buf.hover()<cr>', {noremap = true} },
-  { 'gd', '<Cmd>Telescope lsp_definitions<cr>', {noremap = true} },
-  { 'gi', '<Cmd>lua require("telescope.builtin").lsp_implementations{ sort_lastused=true }<cr>', {noremap = true} },
   { 'gh', '<Cmd>lua vim.lsp.buf.signature_help()<cr>', {noremap = true} },
   { 'gr', '<Cmd>lua vim.lsp.buf.rename()<cr>', {noremap = true} },
   { '<leader>e', '<Cmd>lua vim.diagnostic.open_float()<cr>', {noremap = true} },
   { 'af', '<Cmd>lua vim.lsp.buf.format { async = true }<cr>', {noremap = true} },
   { 'ai', '<Cmd>lua vim.lsp.buf.code_action()<cr>', {noremap = true} },
-  { 'gw', '<Cmd>Telescope lsp_references<cr>', {noremap = true} },
  },
  dependencies = {
    "hrsh7th/cmp-nvim-lsp",
@@ -48,10 +45,40 @@ function M.config()
   local servers = {
     sorbet = {},
     gopls = {},
-    eslint = {},
+    -- eslint = {},
     tsserver = {},
     terraformls = {},
     regols = {},
+    angularls = {
+      filetypes = { 'typescript', 'html', 'typescriptreact', 'typescript.tsx' },
+      -- Check for angular.json since that is the root of the project.
+      -- Don't check for tsconfig.json or package.json since there are multiple of these
+      -- in an angular monorepo setup.
+      root_dir = function(fname)
+        local root_dir = util.root_pattern "tsconfig.json"(fname)
+          or util.root_pattern("package.json", "jsconfig.json", ".git")(fname)
+
+        -- INFO: this is needed to make sure we don't pick up root_dir inside node_modules
+        local node_modules_index = root_dir and root_dir:find("node_modules", 1, true)
+        if node_modules_index and node_modules_index > 0 then
+          root_dir = root_dir:sub(1, node_modules_index - 2)
+        end
+
+        return root_dir
+      end,
+      on_new_config = function(new_config, new_root_dir)
+        -- We need to check our probe directories because they may have changed.
+        new_config.cmd = {
+          'ngserver',
+          '--stdio',
+          '--tsProbeLocations',
+          new_root_dir,
+          '--ngProbeLocations',
+          new_root_dir,
+        }
+      end,
+
+    },
     ccls = {},
     solargraph = {
       capabilities = capabilities,

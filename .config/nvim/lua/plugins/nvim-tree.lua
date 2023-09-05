@@ -1,11 +1,11 @@
 local M = {
-  "kyazdani42/nvim-tree.lua",
+  "nvim-tree/nvim-tree.lua",
   keys = {
     { "<leader>nt", "<cmd>NvimTreeToggle<cr>", desc = "NeoTree" },
     { "<leader>fnt", "<cmd>NvimTreeFindFile!<cr>", desc = "NeoTree" },
   },
   dependencies = {
-    "kyazdani42/nvim-web-devicons"
+    "nvim-tree/nvim-web-devicons"
   }
 }
 

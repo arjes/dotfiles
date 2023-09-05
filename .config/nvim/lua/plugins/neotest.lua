@@ -17,7 +17,7 @@ local M = {
     "nvim-lua/plenary.nvim",
     "nvim-neotest/neotest-plenary",
     "olimorris/neotest-rspec",
-    "antoinemadec/FixCursorHold.nvim",
+    'haydenmeade/neotest-jest',
     { "bmalinconico/vim-test", branch="enable_auto_continue" }
   }
 }
@@ -63,6 +63,14 @@ function M.config()
     adapters = {
       require("neotest-plenary"),
       require("neotest-rspec"),
+      require('neotest-jest')({
+        jestCommand = "npm test --",
+        jestConfigFile = "custom.jest.config.ts",
+        env = { CI = true },
+        cwd = function(path)
+          return vim.fn.getcwd()
+        end,
+      }),
     },
   })
 
