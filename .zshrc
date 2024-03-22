@@ -122,4 +122,4 @@ export EDITOR=nvim
 export SHELL="$(which zsh)"
 
 alias copper="bundle exec rubocop -A && git commit -am 'Copper' && git push"
-
+alias clean-workspace='find . -depth 3 -name .git -type d -exec bash -c "cd {}/.. && git clean-branches" \;'

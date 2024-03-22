@@ -92,15 +92,15 @@ function M.config()
         group_index =2,
         entry_filter = function(entry, ctx)
           local isSorbetUntyped = not (
-               string.find(entry:get_word(),  'T.untyped') 
-            or string.find(entry:get_word(),  'file is not `# typed: true` or higher') 
+             string.find(entry:get_word(),  'T.untyped') 
+          or string.find(entry:get_word(),  'file is not `# typed: true` or higher') 
           )
 
           return isSorbetUntyped
         end
       },
-      { name = 'cmp_tabnine', group_index = 2 },
-      { name = "copilot", group_index = 2 },
+      -- { name = 'cmp_tabnine', group_index = 2 },
+      -- { name = "copilot", group_index = 2 },
       { 
         name = 'buffer',
         group_index = 2,

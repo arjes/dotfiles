@@ -56,6 +56,9 @@ function M.config()
       open_on_run = "short",
       auto_continue = false,
     },
+    running = {
+      concurrent = false
+    },
     quickfix = {
       enabled = false,
       open = false,
@@ -106,13 +109,13 @@ function M.config()
     end
   })
 
-  autocmd('BufWritePost', {
-    pattern = '*_spec.rb',
-    group = group,
-    callback = function()
-      require('neotest').run.run()
-    end
-  })
+  -- autocmd('BufWritePost', {
+  --   pattern = '*_spec.rb',
+  --   group = group,
+  --   callback = function()
+  --     require('neotest').run.run()
+  --   end
+  -- })
 
   autocmd("FileType", {
     pattern = "neotest-output,neotest-attach",

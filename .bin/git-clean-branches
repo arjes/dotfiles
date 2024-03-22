@@ -20,13 +20,14 @@ echo "Looks like you are $CURRENT_BRANCH I will try and bring you back here"
 
 echo "Resetting to the branch $TARGET_BRANCH"
 git checkout $TARGET_BRANCH 
-echo "a"
 git reset --hard origin/$TARGET_BRANCH
 
 echo "Pruning branches squashed merged into target branch $TARGET_BRANCH"
 
 git checkout -q $TARGET_BRANCH || true
 git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do 
+  # Checkout the target branch and make it up to date with the origin
+  git checkout -q $branch && (git pull --rebase origin $branch || true) && git checkout $TARGET_BRANCH
   mergeBase=$(git merge-base $TARGET_BRANCH $branch) && 
     [[ $(git cherry $TARGET_BRANCH $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && 
     git branch -D $branch && echo "Deleted Branch $branch" || true

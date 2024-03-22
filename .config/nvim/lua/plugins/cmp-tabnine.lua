@@ -1,4 +1,5 @@
 local M = {
+  enabled = false,
   "tzachar/cmp-tabnine",
   build='./install.sh',
   event = "InsertEnter",

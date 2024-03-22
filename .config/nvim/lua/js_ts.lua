@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     -- require("typescript").actions.addMissingImports({ sync = true })
     -- vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
     
-    vim.lsp.buf.format { async = false }
+    -- vim.lsp.buf.format { async = false }
 
     -- executeSync('_typescript.addMissingImports')
     -- executeSync('_typescript.removeUnusedImports')
