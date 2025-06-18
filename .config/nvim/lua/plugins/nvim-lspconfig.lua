@@ -46,7 +46,7 @@ function M.config()
     sorbet = {},
     gopls = {},
     -- eslint = {},
-    tsserver = {},
+    ts_ls = {},
     terraformls = {},
     regols = {},
     angularls = {
@@ -80,10 +80,10 @@ function M.config()
 
     },
     ccls = {},
-    solargraph = {
-      capabilities = capabilities,
-      cmd = { 'bundle', 'exec', 'solargraph', 'stdio' },
-    }
+    -- solargraph = {
+    --   capabilities = capabilities,
+    --   cmd = { 'bundle', 'exec', 'solargraph', 'stdio' },
+    -- }
   }
 
   local function on_attach(client, bufnr)

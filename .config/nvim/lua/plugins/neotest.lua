@@ -8,12 +8,14 @@ local M = {
     -- We are running a cmd here to identify the type
     { '<leader>t', '<cmd>lua require("plugins.neotest").runNearest()<CR>', {silent = true} },
     { '<leader>ta', "<cmd>lua require('neotest').run.attach()<CR>", {silent = true} },
+    { '<leader>tc', "<cmd>lua require('neotest').run.stop()<CR>", {silent = true} },
     { '<leader>ts', "<cmd>lua require('neotest').summary.toggle()<CR>", {silent = true} },
     { '<leader>to', "<cmd>lua require('neotest').output.open({ enter = true })<CR>", {silent = true} },
     { '<leader>T', '<cmd>lua require("plugins.neotest").runFile()<CR>', {silent = true} },
     { '<leader>l', '<cmd>lua require("plugins.neotest").runLast()<CR>', {silent = true} },
   },
   dependencies = {
+    "nvim-neotest/nvim-nio",
     "nvim-lua/plenary.nvim",
     "nvim-neotest/neotest-plenary",
     "olimorris/neotest-rspec",

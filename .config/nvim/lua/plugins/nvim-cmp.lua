@@ -110,7 +110,7 @@ function M.config()
           end
         }
       },
-      { name = 'vsnip', group_index = 4 },
+      { name = 'vsnip', group_index = 2},
       { name = 'path', group_index = 4},
     }
   })

@@ -22,7 +22,6 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias clean-branches="git checkout master; git fetch; git rebase; git branch --merged | grep -v '\*' | xargs -n 1 git branch -D"
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -122,4 +121,8 @@ export EDITOR=nvim
 export SHELL="$(which zsh)"
 
 alias copper="bundle exec rubocop -A && git commit -am 'Copper' && git push"
-alias clean-workspace='find . -depth 3 -name .git -type d -exec bash -c "cd {}/.. && git clean-branches" \;'
+alias clean-workspace='find . -depth 3 -name .git -type d -exec bash -c "cd {}/.. && git clean-branches && git gc" \;'
+
+# Update rake command no disable globing so you can pass parameters
+alias rake='noglob rake'
+

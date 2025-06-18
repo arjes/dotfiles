@@ -34,6 +34,8 @@ function M.config()
       file_ignore_patterns = {
         "vendor/.*",
         "sorbet/.*.rbi",
+        -- In LUA % is the escape character
+        "^documentation/lake%-front",
         "grpc_gateway/generated/.*",
         "fake_[^/]+.go$",
         "^proto_gen/"
