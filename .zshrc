@@ -126,3 +126,10 @@ alias clean-workspace='find . -depth 3 -name .git -type d -exec bash -c "cd {}/.
 # Update rake command no disable globing so you can pass parameters
 alias rake='noglob rake'
 
+# if command -v direnv >/dev/null 2>&1; then
+#   eval "$(direnv hook zsh)"
+# fi
+# 
+# if command -v devbox >/dev/null 2>&1; then
+#   eval "$(devbox global shellenv)"
+# fi
