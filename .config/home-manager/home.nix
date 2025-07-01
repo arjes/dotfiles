@@ -130,9 +130,12 @@
        '')
 
         (lib.mkOrder 999 ''
-         if [[ "$TERM" == "xterm-kitty" ]]; then
-         alias ssh="kitty +kitten ssh"
-         fi
+           if [[ "$TERM" == "xterm-kitty" ]]; then
+             alias ssh="kitty +kitten ssh"
+           fi
+
+           # It seems TMUX is maintaining everything except the PATH from the env...
+           export PATH="$HOME/.nix-profile/bin:$PATH"
          ''
         )
     ];
