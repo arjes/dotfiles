@@ -25,9 +25,25 @@
   home.packages = [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
-    # pkgs.hello
-    pkgs.neovim
     pkgs.silver-searcher
+ #   pkgs.git
+    pkgs.devbox
+    pkgs.gnupg
+    pkgs.zsh-powerlevel10k
+
+    pkgs.jq
+    pkgs.tree
+    pkgs.wget
+    pkgs.curl
+    pkgs.git-lfs
+    pkgs.nodejs
+    #pkgs.ruby
+    pkgs.ripgrep
+    pkgs.fd
+
+    pkgs.lua # Required for Neovim / Lazy
+    pkgs.luarocks # Required for Neovim / Lazy
+
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -56,6 +72,10 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+    ".gitattributes".source = ./dotfiles/gitattributes;
+    ".p10k.zsh".source = ./dotfiles/p10k.zsh;
+    ".bin/dev" = { source = ./bin/dev.sh; executable = true; };
+    ".bin/git-clean-branches" = { source = ./bin/git-clean-branches.sh; executable = true; };
   };
 
   # Home Manager can also manage your environment variables through
@@ -75,7 +95,6 @@
   #  /etc/profiles/per-user/brianmalinconico/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    EDITOR = "nvim";
   };
 
   # Let Home Manager install and manage itself.
@@ -88,8 +107,6 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
-      vim = "nvim";
-      vi = "nvim";
       copper = "bundle exec rubocop -A && git commit -am 'Copper' && git push";
       rake = "noglob rake";
       clean-workspace = "find . -depth 3 -name .git -type d -exec bash -c \"cd {}/.. && git clean-branches && git gc\" \\;";
@@ -106,11 +123,19 @@
       plugins = [ "git" "sudo" ]; # add any plugins you like
     };
 
-    initContent = lib.mkOrder 550 ''
-      if [[ "$TERM" == "xterm-kitty" ]]; then
-        alias ssh="kitty +kitten ssh"
-      fi
-    '';
+    initContent = lib.mkMerge [
+      (lib.mkOrder 550 ''
+       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+       source ~/.p10k.zsh
+       '')
+
+        (lib.mkOrder 999 ''
+         if [[ "$TERM" == "xterm-kitty" ]]; then
+         alias ssh="kitty +kitten ssh"
+         fi
+         ''
+        )
+    ];
   };
 
 
@@ -150,5 +175,72 @@
     defaultCommand = "ag --hidden --ignore .git -g \"\"";
   };
 
-  # services.ssh-agent.enable = true;
+  programs.git = {
+    enable = true;
+    userName  = "Brian Malinconico";
+    userEmail = "brian.malinconico@demandscience.com";
+
+    signing = {
+      signByDefault = true;
+    };
+
+    extraConfig = {
+      alias = {
+        co = "checkout";
+        lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+      };
+
+      color = {
+        branch = "auto";
+        diff = "auto";
+        interactive = "auto";
+        status = "auto";
+        ui = "always";
+      };
+
+      push.default = "current";
+
+      core = {
+        editor = "nvim";
+        attributesFile = "${config.home.homeDirectory}/.gitattributes";
+      };
+
+      credential.helper = "osxkeychain";
+
+      merge.tool = "vimdiff";
+
+      mergetool = {
+        prompt = true;
+      };
+
+      "mergetool \"vimdiff\"" = {
+        cmd = "nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'";
+      };
+
+      "filter \"lfs\"" = {
+        process  = "git-lfs filter-process";
+        required = true;
+        clean    = "git-lfs clean -- %f";
+        smudge   = "git-lfs smudge -- %f";
+      };
+
+      "url \"git@github.com:\"" = {
+        insteadOf = "https://github.com/";
+      };
+
+      commit.gpgSign = true;
+
+      gpg.program = "${pkgs.gnupg}/bin/gpg";
+    };
+  };
+
+  programs.neovim = {
+    enable = true;
+    vimAlias = true;
+    viAlias = true;
+    defaultEditor = true;
+    withRuby = false;
+  };
+
+# services.ssh-agent.enable = true;
 }
