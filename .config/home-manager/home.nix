@@ -181,7 +181,7 @@
   programs.git = {
     enable = true;
     userName  = "Brian Malinconico";
-    userEmail = "brian.malinconico@demandscience.com";
+    userEmail = "brian.malinconico@terminus.com";
 
     signing = {
       signByDefault = true;
